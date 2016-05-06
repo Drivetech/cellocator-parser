@@ -4,17 +4,12 @@
   "description": "Parse raw data from cellocator devices",
   "main": "lib",
   "scripts": {
-    "prepublish": "npm run build -s",
-    "prebuild": "npm run lint -s && npm run clean -s",
-    "build": "babel src --out-dir lib --source-maps",
-    "lint": "eslint src",
-    "clean": "rimraf lib",
-    "pretest": "npm run lint -s",
-    "test": "babel-node ./node_modules/.bin/isparta cover _mocha",
+    "pretest": "eslint src",
+    "test": "istanbul cover _mocha",
     "coveralls": "coveralls < coverage/lcov.info"
   },
   "engines": {
-    "node": ">=0.12"
+    "node": ">=4"
   },
   "repository": {
     "type": "git",
@@ -39,15 +34,11 @@
     "pad": "^1.0.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.7.7",
-    "babel-core": "^6.7.7",
-    "babel-preset-es2015": "^6.6.0",
     "chai": "^3.5.0",
     "coveralls": "^2.11.9",
-    "eslint": "2.8.0",
+    "eslint": "2.9.0",
     "isparta": "^4.0.0",
-    "mocha": "^2.4.5",
-    "rimraf": "^2.5.2"
+    "mocha": "^2.4.5"
   },
   "eslintConfig": {
     "env": {
@@ -56,9 +47,6 @@
       "mocha": true
     },
     "extends": "eslint:recommended",
-    "parserOptions": {
-      "sourceType": "module"
-    },
     "rules": {
       "indent": [
         2,
@@ -77,11 +65,6 @@
         "always"
       ]
     }
-  },
-  "babel": {
-    "presets": [
-      "es2015"
-    ]
   },
   "tonicExampleFilename": "example.js"
 }
