@@ -2,7 +2,7 @@
   "name": "cellocator-parser",
   "version": "0.0.1",
   "description": "Parse raw data from cellocator devices",
-  "main": "lib",
+  "main": "src",
   "scripts": {
     "pretest": "eslint src",
     "test": "istanbul cover _mocha",

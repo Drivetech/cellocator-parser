@@ -1,3 +1,5 @@
+'use strict';
+
 const ConvertBase = require('convert-base');
 const hardwares = require('./hardwares');
 const moment = require('moment');
@@ -8,9 +10,9 @@ const convertBase = (data, fromBase , toBase) => {
   return converter.convert(data, fromBase, toBase);
 };
 
-const hex2Ascii = (data) => data.split(/([A-F0-9]{2})/i).filter(x => x !== '').map(x => String.fromCharCode(parseInt(x, 16))).join('');
+const hex2Ascii = data => data.split(/([A-F0-9]{2})/i).filter(x => x !== '').map(x => String.fromCharCode(parseInt(x, 16))).join('');
 
-const reverseHex = (data) => {
+const reverseHex = data => {
   data = data.toUpperCase();
   if (data.length % 2 !== 0) data = `0${data}`;
   return data.split(/([A-F0-9]{2})/).filter(x => x !== '').reverse().join('');
@@ -18,34 +20,34 @@ const reverseHex = (data) => {
 
 const lpad = (data, length) => pad(length, data, '0');
 
-const hex2bin = (data) => lpad(convertBase(data, 16, 2), data.length * 4);
+const hex2bin = data => lpad(convertBase(data, 16, 2), data.length * 4);
 
-exports.parseSystemCode = (bytes1To4) => hex2Ascii(bytes1To4);
+exports.parseSystemCode = bytes1To4 => hex2Ascii(bytes1To4);
 
-exports.parseMessageType = (byte5) => convertBase(byte5, 16, 10);
+exports.parseMessageType = byte5 => convertBase(byte5, 16, 10);
 
-exports.parseUnitsId = (bytes6To9) => convertBase(reverseHex(bytes6To9), 16, 10);
+exports.parseUnitsId = bytes6To9 => convertBase(reverseHex(bytes6To9), 16, 10);
 
-exports.parseCommunication = (bytes10To11) => {
+exports.parseCommunication = bytes10To11 => {
   const byte10 = hex2bin(bytes10To11.substring(0, 2));
   const byte11 = hex2bin(bytes10To11.substring(2, 4));
   return {
-    garminDisabled: byte11[0],
-    garminNotConnected: byte11[1],
-    directFromRam: byte11[2],
+    garminDisabled: byte11[0] === '1',
+    garminNotConnected: byte11[1] === '1',
+    directFromRam: byte11[2] === '1',
     pspModeIsEnabled: byte11.substring(3, 5),
-    notCanOriginatedSpeed: byte11[5],
-    notCanOriginatedOdometer: byte11[6],
-    activeTransmission: byte11[7],
-    noHibernation: byte10[0],
-    momentarySpeed: byte10[1],
+    notCanOriginatedSpeed: byte11[5] === '1',
+    notCanOriginatedOdometer: byte11[6] === '1',
+    activeTransmission: byte11[7] === '1',
+    noHibernation: byte10[0] === '1',
+    momentarySpeed: byte10[1] === '1',
     h: byte10.substring(3, 7)
   };
 };
 
-exports.parseMessageNumerator = (byte12) => convertBase(byte12, 16, 10);
+exports.parseMessageNumerator = byte12 => convertBase(byte12, 16, 10);
 
-const parseHardware = (byte13) => {
+const parseHardware = byte13 => {
   const data = hex2bin(byte13);
   const modem  = convertBase(data.substr(0, 3), 2, 10);
   const model = convertBase(data.substr(3, 5), 2, 10);
@@ -53,13 +55,13 @@ const parseHardware = (byte13) => {
   return hardware ? hardware.id : '';
 };
 
-const parseSoftware = (byte14) => convertBase(byte14, 16, 10);
+const parseSoftware = byte14 => convertBase(byte14, 16, 10);
 
 exports.parseVersion = (byte13, byte14) => `HW: <${parseHardware(byte13)}>, SW: <${parseSoftware(byte14)}>`;
 
-exports.protocolVersionIdentifier = (byte15) => convertBase(byte15, 16, 10);
+exports.protocolVersionIdentifier = byte15 => convertBase(byte15, 16, 10);
 
-exports.parseUnitsStatusCurrentGsmOperator = (byte16) => {
+exports.parseUnitsStatusCurrentGsmOperator = byte16 => {
   const firstnibble = byte16[0];
   const unitsstatus = convertBase(byte16[1], 16, 2);
   return {
@@ -71,15 +73,15 @@ exports.parseUnitsStatusCurrentGsmOperator = (byte16) => {
   };
 };
 
-exports.parseCurrentGsmOperator = (byte17) => byte17;
+exports.parseCurrentGsmOperator = byte17 => byte17;
 
-exports.parseTransmissionReasonSpecificData = (byte18) => convertBase(byte18, 16, 10);
+exports.parseTransmissionReasonSpecificData = byte18 => convertBase(byte18, 16, 10);
 
-exports.parseTransmissionReason = (byte19) => convertBase(byte19, 16, 10);
+exports.parseTransmissionReason = byte19 => convertBase(byte19, 16, 10);
 
-exports.parseEngineStatus = (byte20) => convertBase(byte20, 16, 10);
+exports.parseEngineStatus = byte20 => convertBase(byte20, 16, 10);
 
-exports.parseIO = (bytes21To24) => {
+exports.parseIO = bytes21To24 => {
   const byte21 = hex2bin(bytes21To24.substring(0, 2));
   const byte22 = hex2bin(bytes21To24.substring(2, 4));
   const byte23 = hex2bin(bytes21To24.substring(4, 6));
@@ -107,17 +109,17 @@ exports.parsePlmn = (byte25, currentGsmOperator1stNibble, currentGsmOperator) =>
   return convertBase(`${currentGsmOperator1stNibble}${currentGsmOperator}${byte25}`, 16, 10);
 };
 
-exports.parseAnalogInput1 = (byte26) => convertBase(byte26, 16, 10) * 0.1176470588235;
+exports.parseAnalogInput1 = byte26 => convertBase(byte26, 16, 10) * 0.1176470588235;
 
-exports.parseAnalogInput2 = (byte27) => convertBase(byte27, 16, 10) * 0.01647058823;
+exports.parseAnalogInput2 = byte27 => convertBase(byte27, 16, 10) * 0.01647058823;
 
-exports.parseAnalogInput3 = (byte28) => (convertBase(byte28, 16, 10) * 0.4314) - 40;
+exports.parseAnalogInput3 = byte28 => (convertBase(byte28, 16, 10) * 0.4314) - 40;
 
-exports.parseAnalogInput4 = (byte29) => convertBase(byte29, 16, 10);
+exports.parseAnalogInput4 = byte29 => convertBase(byte29, 16, 10);
 
-exports.parseMileageCounter = (bytes30To32) => convertBase(reverseHex(bytes30To32), 16, 10);
+exports.parseMileageCounter = bytes30To32 => convertBase(reverseHex(bytes30To32), 16, 10);
 
-exports.multiPurposeField = (bytes33To38) => reverseHex(bytes33To38);
+exports.multiPurposeField = bytes33To38 => reverseHex(bytes33To38);
 
 exports.parseGpsTime = (bytefrom39to40, seconds) => {
   seconds = lpad(convertBase(seconds, 16, 10), 2);
@@ -129,13 +131,13 @@ exports.parseGpsTime = (bytefrom39to40, seconds) => {
   return moment(`${now}-${day} ${hours}:${minutes}:${seconds}`).toISOString();
 };
 
-exports.parseLocationStatus = (byte41) => hex2bin(byte41);
+exports.parseLocationStatus = byte41 => hex2bin(byte41);
 
 /*
 With Normal PMODE Filter settings, PMODE valid is 2 to 6
 With Tide PMODE Filter settings PMODE valid 3 or 4
 */
-exports.parseMode1 = (byte42) => {
+exports.parseMode1 = byte42 => {
   const pModes = {
     '0': 'No navigation solution',
     '1': '1 satellite solution',
@@ -176,7 +178,7 @@ exports.parseMode1 = (byte42) => {
   };
 };
 
-exports.parseMode2 = (byte43) => {
+exports.parseMode2 = byte43 => {
   const modes = {
     '00': 'Solution not validated',
     '01': 'DR Sensor Data',
@@ -191,11 +193,11 @@ exports.parseMode2 = (byte43) => {
   return byte43 in modes ? modes[byte43] : null;
 };
 
-exports.parseSatellites = (byte44) => convertBase(byte44, 16, 10);
+exports.parseSatellites = byte44 => convertBase(byte44, 16, 10);
 
-const notBinaryData = (data) => data.split('').map(x => x === '1' ? '0' : '1').join('');
+const notBinaryData = data => data.split('').map(x => x === '1' ? '0' : '1').join('');
 
-const parseLatitude = (bytes45To48) => {
+const parseLatitude = bytes45To48 => {
   let lat = 0;
   const data = reverseHex(bytes45To48);
   if (data[0] === 'F') {
@@ -207,7 +209,7 @@ const parseLatitude = (bytes45To48) => {
   return lat * (180 / Math.PI) * Math.pow(10, -8);
 };
 
-const parseLongitude = (bytes49To52) => {
+const parseLongitude = bytes49To52 => {
   let lng = 0;
   const data = reverseHex(bytes49To52);
   if (data[0] === 'F') {
@@ -227,11 +229,11 @@ exports.parseLoc = (bytes45To48, bytes49To52) => {
   };
 };
 
-exports.parseAltitude = (bytes53To56) => convertBase(reverseHex(bytes53To56), 16, 10) * 0.01;
+exports.parseAltitude = bytes53To56 => convertBase(reverseHex(bytes53To56), 16, 10) * 0.01;
 
-exports.parseSpeed = (bytes57To60) => convertBase(reverseHex(bytes57To60), 16, 10) * 0.036;
+exports.parseSpeed = bytes57To60 => convertBase(reverseHex(bytes57To60), 16, 10) * 0.036;
 
-exports.parseDirection = (bytes61To62) => convertBase(reverseHex(bytes61To62), 16, 10) * (180 / Math.PI) * 0.001;
+exports.parseDirection = bytes61To62 => convertBase(reverseHex(bytes61To62), 16, 10) * (180 / Math.PI) * 0.001;
 
 exports.parseDatetime = (bytes68To69, byte67, byte66, byte65, byte64, byte63) => {
   const year = convertBase(reverseHex(bytes68To69), 16, 10);
@@ -244,7 +246,7 @@ exports.parseDatetime = (bytes68To69, byte67, byte66, byte65, byte64, byte63) =>
   return moment(`${date}+00:00`, 'YYYYMMDDHHmmssZZ').toISOString();
 };
 
-const checksum = (trama) => {
+const checksum = trama => {
   const code = trama.split(/([A-F0-9]{2})/i).filter(x => x !== '').reduce((prev, curr) => prev + convertBase(curr, 16, 10), 0);
   return `00${convertBase(code, 10, 16)}`.substr(-2);
 };

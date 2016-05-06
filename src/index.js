@@ -6,21 +6,10 @@ const patterns = {
   data: /^([A-F0-9]{140})$/i
 };
 
-const getData = (raw) => {
+const getData = raw => {
   const bytes = raw.toString().split(/([A-F0-9]{2})/i).filter(x => x !== '');
   const seconds = bytes[62];
-  const {
-    garminDisabled,
-    garminNotConnected,
-    directFromRam,
-    pspModeIsEnabled,
-    notCanOriginatedSpeed,
-    notCanOriginatedOdometer,
-    activeTransmission,
-    noHibernation,
-    momentarySpeed,
-    h
-  } = utils.parseCommunication(bytes.slice(9, 11).join(''));
+  const communication = utils.parseCommunication(bytes.slice(9, 11).join(''));
   const messageNumerator = utils.parseMessageNumerator(bytes[11]);
   const version = utils.parseVersion(bytes[12], bytes[13]);
   const transmissionReason = utils.parseTransmissionReason(bytes[18]);
@@ -48,19 +37,19 @@ const getData = (raw) => {
     raw: bytes.join(''),
     device: 'CelloTrack',
     type: 'data',
-    loc: loc || null,
-    speed: speed || null,
-    datetime: datetime || null,
-    gpsTime: gpsTime || null,
-    direction: direction || null,
-    satellites: satellites || null,
+    loc: loc,
+    speed: speed,
+    datetime: datetime,
+    gpsTime: gpsTime,
+    direction: direction,
+    satellites: satellites,
     voltage: {
-      ada: analog1 || null,
-      adb: analog2 || null,
-      adc: analog3 || null,
-      add: analog4 || null
+      ada: analog1,
+      adb: analog2,
+      adc: analog3,
+      add: analog4
     },
-    altitude: altitude || null,
+    altitude: altitude,
     status: {
       engine: engine === 1,
       unlockInactive: io.unlockInactive,
@@ -71,16 +60,16 @@ const getData = (raw) => {
       ignitionPortStatus: io.ignitionPortStatus,
       accelerometerStatus: io.accelerometerStatus,
       lock: io.lock,
-      garminDisabled: garminDisabled === '1',
-      garminNotConnected: garminNotConnected === '1',
-      directFromRam: directFromRam === '1',
-      pspModeIsEnabled: pspModeIsEnabled,
-      notCanOriginatedSpeed: notCanOriginatedSpeed === '1',
-      notCanOriginatedOdometer: notCanOriginatedOdometer === '1',
-      activeTransmission: activeTransmission === '1',
-      noHibernation: noHibernation === '1',
-      momentarySpeed: momentarySpeed === '1',
-      h: h,
+      garminDisabled: communication.garminDisabled,
+      garminNotConnected: communication.garminNotConnected,
+      directFromRam: communication.directFromRam,
+      pspModeIsEnabled: communication.pspModeIsEnabled,
+      notCanOriginatedSpeed: communication.notCanOriginatedSpeed,
+      notCanOriginatedOdometer: communication.notCanOriginatedOdometer,
+      activeTransmission: communication.activeTransmission,
+      noHibernation: communication.noHibernation,
+      momentarySpeed: communication.momentarySpeed,
+      h: communication.h,
       locationStatus: locationStatus,
       charge: io.charge,
       standardImmobilizer: io.standardImmobilizer,
@@ -90,8 +79,8 @@ const getData = (raw) => {
       gradualStop: io.gradualStop,
       siren: io.siren
     },
-    version: version || null,
-    transmissionReason: transmissionReason || null,
+    version: version,
+    transmissionReason: transmissionReason,
     odometer: odometer,
     modes: {
       '1': mode1,
@@ -103,7 +92,7 @@ const getData = (raw) => {
   return data;
 };
 
-const parse = (raw) => {
+const parse = raw => {
   let result = {type: 'UNKNOWN', raw: raw.toString()};
   if (patterns.data.test(raw)) {
     result = getData(raw);
@@ -111,7 +100,7 @@ const parse = (raw) => {
   return result;
 };
 
-const isCello = (raw) => {
+const isCello = raw => {
   let result = false;
   if (patterns.data.test(raw)) {
     result = true;
