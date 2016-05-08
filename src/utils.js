@@ -166,9 +166,12 @@ exports.parseMode1 = byte42 => {
     '0': 'No DGPS position',
     '1': 'DGPS position'
   };
-  const {
-    dgps, dopMask, altMode, tpMode, pMode
-  } = /([01]{1})([01]{1})([01]{2})([01]{1})([01]{3})/i.exec(hex2bin(byte42));
+  const modes = /([01]{1})([01]{1})([01]{2})([01]{1})([01]{3})/i.exec(hex2bin(byte42));
+  const dgps = modes[0];
+  const dopMask = modes[1];
+  const altMode = modes[2];
+  const tpMode = modes[3];
+  const pMode = modes[4];
   return {
     pMode: pModes[pMode],
     tpMode: tpModes[tpMode],
