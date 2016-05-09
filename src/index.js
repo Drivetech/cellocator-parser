@@ -24,6 +24,7 @@ const getData = raw => {
   const analog3 = utils.parseAnalogInput3(bytes[27]);
   const analog4 = utils.parseAnalogInput4(bytes[28]);
   const odometer = utils.parseMileageCounter(bytes.slice(29, 32).join(''));
+  const imei = utils.multiPurposeField(bytes.slice(32, 38).join(''));
   const gpsTime = utils.parseGpsTime(bytes.slice(38, 40).join(''), seconds);
   const locationStatus = utils.parseLocationStatus(bytes[40]);
   const mode1 = utils.parseMode1(bytes[41]);
@@ -36,6 +37,7 @@ const getData = raw => {
   const datetime = utils.parseDatetime(bytes.slice(67, 69).join(''), bytes[66], bytes[65], bytes[64], bytes[63], bytes[62]);
   const data = {
     raw: bytes.join(''),
+    imei: imei,
     device: 'CelloTrack',
     type: 'data',
     loc: loc,
