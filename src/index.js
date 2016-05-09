@@ -9,6 +9,7 @@ const patterns = {
 const getData = raw => {
   const bytes = raw.toString().split(/([A-F0-9]{2})/i).filter(x => x !== '');
   const seconds = bytes[62];
+  const messageType = utils.parseMessageType(bytes[4]);
   const communication = utils.parseCommunication(bytes.slice(9, 11).join(''));
   const messageNumerator = utils.parseMessageNumerator(bytes[11]);
   const version = utils.parseVersion(bytes[12], bytes[13]);
@@ -82,12 +83,13 @@ const getData = raw => {
     version: version,
     transmissionReason: transmissionReason,
     odometer: odometer,
-    modes: {
+    gpsModes: {
       '1': mode1,
       '2': mode2
     },
     plmn: plmn,
-    messageNumerator: messageNumerator
+    sn: messageNumerator,
+    messageType: messageType
   };
   return data;
 };
