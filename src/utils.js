@@ -9,16 +9,23 @@ const convertBase = (data, fromBase , toBase) => {
   const converter = new ConvertBase();
   return converter.convert(data, fromBase, toBase);
 };
+exports.convertBase = convertBase;
 
 const hex2Ascii = data => data.split(/([A-F0-9]{2})/i).filter(x => x !== '').map(x => String.fromCharCode(parseInt(x, 16))).join('');
+exports.hex2Ascii = hex2Ascii;
+
+const ascii2hex = data => data.split('').map(x => x.charCodeAt(0).toString(16).toUpperCase()).join('');
+exports.ascii2hex = ascii2hex;
 
 const reverseHex = data => {
   data = data.toUpperCase();
   if (data.length % 2 !== 0) data = `0${data}`;
   return data.split(/([A-F0-9]{2})/).filter(x => x !== '').reverse().join('');
 };
+exports.reverseHex = reverseHex;
 
 const lpad = (data, length) => pad(length, data, '0');
+exports.lpad = lpad;
 
 const hex2bin = data => lpad(convertBase(data, 16, 2), data.length * 4);
 
@@ -253,6 +260,7 @@ const checksum = trama => {
   const code = trama.split(/([A-F0-9]{2})/i).filter(x => x !== '').reduce((prev, curr) => prev + convertBase(curr, 16, 10), 0);
   return `00${convertBase(code, 10, 16)}`.substr(-2);
 };
+exports.checksum = checksum;
 
 exports.validate = (byte70, bytes4To69) => {
   return checksum(bytes4To69) === byte70;
