@@ -1,3 +1,15 @@
+#### 0.0.2 (2016-6-15)
+
+##### Chores
+
+* **package:**
+  * Upgrade mocha ([a33738e4](https://github.com/lgaticaq/cellocator-parser/commit/a33738e48e0070f2174f5c86d1e688d84ba0d715))
+  * update eslint to version 2.12.0 ([0f559cd3](https://github.com/lgaticaq/cellocator-parser/commit/0f559cd3a30def99dc24ba9a8195d6e2bc57fce0))
+  * update eslint to version 2.11.1 ([7511cdc8](https://github.com/lgaticaq/cellocator-parser/commit/7511cdc856a8d2d20611613c433421632147a880))
+  * update eslint to version 2.11.0 ([c35ce73d](https://github.com/lgaticaq/cellocator-parser/commit/c35ce73d52f2892d3046c2c77289f073bcded136))
+  * update eslint to version 2.10.2 ([475074be](https://github.com/lgaticaq/cellocator-parser/commit/475074bea082f72a7d256699e97fe69a3d9e9084))
+  * update dependencies ([7db0f943](https://github.com/lgaticaq/cellocator-parser/commit/7db0f94356064545531c32dd59b5c0ab02cb234e))
+
 #### 0.0.1 (2016-06-15)
 
 * Add ascii2hex ([94a0732](https://github.com/lgaticaq/cellocator-parser/commit/94a0732))
