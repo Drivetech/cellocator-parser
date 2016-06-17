@@ -1,3 +1,20 @@
+#### 0.0.3 (2016-6-17)
+
+##### Chores
+
+* **hardware:** Add hardware 38 ([1628e05d](https://github.com/lgaticaq/cellocator-parser/commit/1628e05d7ca92d56d76425bda5a1a12c4212d40c))
+
+##### Documentation Changes
+
+* **readme:** Add sample data in Use ([82963857](https://github.com/lgaticaq/cellocator-parser/commit/829638579380fbbb33ae893936cec61af5bbba70))
+
+##### Bug Fixes
+
+* **src:**
+  * Fix get imei ([d7bbff29](https://github.com/lgaticaq/cellocator-parser/commit/d7bbff29691255cd7d9251ee7aae5a58af54597d))
+  * Fix return data from parseCommunication ([08f1e95a](https://github.com/lgaticaq/cellocator-parser/commit/08f1e95aff83528a912dac163d43f88f4dad68cc))
+* **hardware:** Fix hardwares id 222 and 223 ([89acf960](https://github.com/lgaticaq/cellocator-parser/commit/89acf96070e1033739e80055881bedb369664506))
+
 #### 0.0.2 (2016-6-15)
 
 ##### Chores
