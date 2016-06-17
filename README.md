@@ -7,9 +7,8 @@
 [![Code Climate](https://img.shields.io/codeclimate/github/lgaticaq/cellocator-parser.svg?style=flat-square)](https://codeclimate.com/github/lgaticaq/cellocator-parser)
 [![dependency Status](https://img.shields.io/david/lgaticaq/cellocator-parser.svg?style=flat-square)](https://david-dm.org/lgaticaq/cellocator-parser#info=dependencies)
 [![devDependency Status](https://img.shields.io/david/dev/lgaticaq/cellocator-parser.svg?style=flat-square)](https://david-dm.org/lgaticaq/cellocator-parser#info=devDependencies)
-[![Join the chat at https://gitter.im/lgaticaq/cellocator-parser](https://img.shields.io/badge/gitter-join%20chat%20%E2%86%92-brightgreen.svg?style=flat-square)](https://gitter.im/lgaticaq/cellocator-parser?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Parse raw data from cellocator devices
+> Parse raw data from cellocator devices
 
 ## Installation
 
@@ -19,9 +18,82 @@ npm i -S cellocator-parser
 
 ## Use
 
+[Try on Tonic](https://tonicdev.com/npm/cellocator-parser)
 ```js
-import cellocator from 'cellocator-parser'
+const cellocator = require('cellocator-parser');
 
 const raw = new Buffer('4d43475000bdda0b0000060ddf20041017002000e3c40000baeff3c6b6224502000000000000ea65000402090daec5f7cb302cff3357000038090000930a002a170c03e007c1');
 const data = cellocator.parse(raw);
+/*{
+  raw: '4d43475000bdda0b0000060ddf20041017002000e3c40000baeff3c6b6224502000000000000ea65000402090daec5f7cb302cff3357000038090000930a002a170c03e007c1',
+  imei: 0,
+  device: 'CelloTrack',
+  type: 'data',
+  loc: {
+    type: 'Point',
+    coordinates: [ -79.09097658351084, -7.953307941260071 ]
+  },
+  speed: 84.96,
+  datetime: '2016-03-12T23:42:00.000Z',
+  gpsTime: '2016-06-12T23:42:00.000Z',
+  direction: 155.09967514191385,
+  satellites: 9,
+  voltage: {
+    ada: 28.1176470588165,
+    adb: 4.00235293989,
+    adc: 45.41720000000001,
+    add: 182
+  },
+  altitude: 223.23000000000002,
+  status: {
+    engine: false,
+    unlockInactive: true,
+    panicInactive: true,
+    drivingStatus: true,
+    shockInactive: true,
+    doorInactive: true,
+    ignitionPortStatus: true,
+    accelerometerStatus: true,
+    lock: true,
+    noHibernation: false,
+    momentarySpeed: false,
+    privateMode: false,
+    firmwareSubversion: '0011',
+    canOriginatedOdometer: false,
+    canOriginatedSpeed: false,
+    dataType33_38: '0',
+    messageSource: '0',
+    garminConnected: false,
+    garminEnable: false,
+    messageInitiative: false,
+    locationStatus: '00000000',
+    charge: false,
+    standardImmobilizer: false,
+    globalOutput: false,
+    ledOut: false,
+    gpsPower: false,
+    gradualStop: false,
+    siren: false
+  },
+  version: 'HW: <223>, SW: <32>',
+  transmissionReason: 32,
+  odometer: 148770,
+  gpsModes: {
+    '1': {
+      pMode: '>3 satellite solution',
+      tpMode: 'Full power position',
+      altMode: 'No altitude hold',
+      dopMask: 'DOP mask not exceeded',
+      dgps: 'No DGPS position'
+    },
+    '2': 'Validated'
+  },
+  plmn: 71610,
+  sn: 13,
+  messageType: 0
+}*/
 ```
+
+## License
+
+[MIT](https://tldrlegal.com/license/mit-license)
