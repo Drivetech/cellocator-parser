@@ -1,6 +1,6 @@
 {
   "name": "cellocator-parser",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Parse raw data from cellocator devices",
   "main": "src",
   "scripts": {
