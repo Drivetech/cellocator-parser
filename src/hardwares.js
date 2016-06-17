@@ -205,5 +205,9 @@ module.exports = [
     id: 223,
     model: {id: 31, name: 'Cello-IQ'},
     modem: {code: 6, name: 'Telit GE864, automative'}
+  }, {
+    id: 38,
+    model: {id: 6, name: 'Cello-D'},
+    modem: {code: 1, name: 'UE910 NAR'}
   }
 ];
