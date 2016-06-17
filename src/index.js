@@ -113,8 +113,14 @@ const isCello = raw => {
   return result;
 };
 
+const getImei = raw => {
+  const bytes = raw.toString().split(/([A-F0-9]{2})/i).filter(x => x !== '');
+  return utils.multiPurposeField(bytes.slice(32, 38).join(''), bytes[40]);
+};
+
 module.exports = {
   parse: parse,
   patterns: patterns,
-  isCello: isCello
+  isCello: isCello,
+  getImei: getImei
 };
