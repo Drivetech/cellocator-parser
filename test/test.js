@@ -30,6 +30,6 @@ describe('cellocator-parzer', () => {
     expect(data.status.ignitionPortStatus).to.be.true;
     expect(data.status.accelerometerStatus).to.be.true;
     expect(data.status.lock).to.be.true;
-    expect(data.version).to.eql('HW: <224>, SW: <32>');
+    expect(data.version).to.eql('HW: <223>, SW: <32>');
   });
 });
