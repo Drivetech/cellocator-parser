@@ -1,3 +1,13 @@
+### 0.1.0 (2016-6-17)
+
+##### Chores
+
+* **src:** Add getImei ([d492c3e8](https://github.com/lgaticaq/cellocator-parser/commit/d492c3e8a67f90fce05461cc7e7ef53ccf474c0b))
+
+##### Bug Fixes
+
+* **test:** Fix tests ([1da95438](https://github.com/lgaticaq/cellocator-parser/commit/1da954387cd40fdcbb7ed75575e05fe42713d7c4))
+
 #### 0.0.3 (2016-6-17)
 
 ##### Chores
