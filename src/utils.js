@@ -127,7 +127,10 @@ exports.parseAnalogInput4 = byte29 => convertBase(byte29, 16, 10);
 
 exports.parseMileageCounter = bytes30To32 => convertBase(reverseHex(bytes30To32), 16, 10);
 
-exports.multiPurposeField = bytes33To38 => reverseHex(bytes33To38);
+exports.multiPurposeField = (bytes33To38, byte41) => {
+  const ms4And5From41 = hex2bin(byte41).substring(1, 3);
+  return parseInt(`${ms4And5From41}${hex2bin(reverseHex(bytes33To38))}`, 2);
+};
 
 exports.parseGpsTime = (bytefrom39to40, seconds) => {
   seconds = lpad(convertBase(seconds, 16, 10), 2);

@@ -24,7 +24,7 @@ const getData = raw => {
   const analog3 = utils.parseAnalogInput3(bytes[27]);
   const analog4 = utils.parseAnalogInput4(bytes[28]);
   const odometer = utils.parseMileageCounter(bytes.slice(29, 32).join(''));
-  const imei = utils.multiPurposeField(bytes.slice(32, 38).join(''));
+  const imei = utils.multiPurposeField(bytes.slice(32, 38).join(''), bytes[40]);
   const gpsTime = utils.parseGpsTime(bytes.slice(38, 40).join(''), seconds);
   const locationStatus = utils.parseLocationStatus(bytes[40]);
   const mode1 = utils.parseMode1(bytes[41]);
