@@ -39,16 +39,17 @@ exports.parseCommunication = bytes10To11 => {
   const byte10 = hex2bin(bytes10To11.substring(0, 2));
   const byte11 = hex2bin(bytes10To11.substring(2, 4));
   return {
-    garminDisabled: byte11[0] === '1',
-    garminNotConnected: byte11[1] === '1',
-    directFromRam: byte11[2] === '1',
-    pspModeIsEnabled: byte11.substring(3, 5),
-    notCanOriginatedSpeed: byte11[5] === '1',
-    notCanOriginatedOdometer: byte11[6] === '1',
-    activeTransmission: byte11[7] === '1',
-    noHibernation: byte10[0] === '1',
-    momentarySpeed: byte10[1] === '1',
-    h: byte10.substring(3, 7)
+    noHibernation: byte11[0] === '1',
+    momentarySpeed: byte11[1] === '1',
+    privateMode: byte11[2] === '1',
+    firmwareSubversion: byte11.substring(3, 7),
+    canOriginatedOdometer: byte10[0] === '1',
+    canOriginatedSpeed: byte10[1] === '1',
+    dataType33_38: byte10.substring(2, 3),
+    messageSource: byte10[4],
+    garminConnected: byte10[5] === '1',
+    garminEnable: byte10[6] === '1',
+    messageInitiative: byte10[7] === '1'
   };
 };
 
