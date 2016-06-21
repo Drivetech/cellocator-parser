@@ -4,7 +4,7 @@
   "description": "Parse raw data from cellocator devices",
   "main": "src",
   "scripts": {
-    "pretest": "eslint src",
+    "pretest": "eslint .",
     "test": "istanbul cover _mocha",
     "coveralls": "coveralls < coverage/lcov.info",
     "codeclimate": "codeclimate-test-reporter < coverage/lcov.info",
