@@ -1,3 +1,15 @@
+#### 0.1.1 (2016-6-21)
+
+##### Chores
+
+* **package:**
+  * update eslint to version 2.13.1 ([bae8207c](https://github.com/lgaticaq/cellocator-parser/commit/bae8207c3bbd2f689f6bf2917cc4d72df7615a1d))
+  * update eslint to version 2.13.0 ([f5feef22](https://github.com/lgaticaq/cellocator-parser/commit/f5feef222c32f0d17920a256576f04c3e0b6f148))
+
+##### Bug Fixes
+
+* **parser:** Fix encoding in parse raw data ([78a8ea87](https://github.com/lgaticaq/cellocator-parser/commit/78a8ea8729edebd8cdf7e2447d52f1476299372d))
+
 ### 0.1.0 (2016-6-17)
 
 ##### Chores
