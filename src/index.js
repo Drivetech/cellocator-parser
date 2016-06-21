@@ -7,7 +7,7 @@ const patterns = {
 };
 
 const getData = raw => {
-  const bytes = raw.toString().split(/([A-F0-9]{2})/i).filter(x => x !== '');
+  const bytes = raw.toString('hex').split(/([A-F0-9]{2})/i).filter(x => x !== '');
   const seconds = bytes[62];
   const messageType = utils.parseMessageType(bytes[4]);
   const communication = utils.parseCommunication(bytes.slice(9, 11).join(''));
@@ -98,8 +98,8 @@ const getData = raw => {
 };
 
 const parse = raw => {
-  let result = {type: 'UNKNOWN', raw: raw.toString()};
-  if (patterns.data.test(raw)) {
+  let result = {type: 'UNKNOWN', raw: raw.toString('hex')};
+  if (patterns.data.test(raw.toString('hex'))) {
     result = getData(raw);
   }
   return result;
@@ -107,14 +107,14 @@ const parse = raw => {
 
 const isCello = raw => {
   let result = false;
-  if (patterns.data.test(raw)) {
+  if (patterns.data.test(raw.toString('hex'))) {
     result = true;
   }
   return result;
 };
 
 const getImei = raw => {
-  const bytes = raw.toString().split(/([A-F0-9]{2})/i).filter(x => x !== '');
+  const bytes = raw.toString('hex').split(/([A-F0-9]{2})/i).filter(x => x !== '');
   return utils.multiPurposeField(bytes.slice(32, 38).join(''), bytes[40]);
 };
 

@@ -5,9 +5,9 @@ const expect = require('chai').expect;
 
 describe('cellocator-parzer', () => {
   it('should return data parsed', () => {
-    const raw = new Buffer('4d43475000bdda0b0000060ddf20041017002000e3c40000baeff3c6b6224502000000000000ea65000402090daec5f7cb302cff3357000038090000930a002a170c03e007c1');
+    const raw = new Buffer('4d43475000bdda0b0000060ddf20041017002000e3c40000baeff3c6b6224502000000000000ea65000402090daec5f7cb302cff3357000038090000930a002a170c03e007c1', 'hex');
     const data = lib.parse(raw);
-    expect(data.raw).to.eql(raw.toString());
+    expect(data.raw).to.eql(raw.toString('hex'));
     expect(data.device).to.eql('CelloTrack');
     expect(data.type).to.eql('data');
     expect(data.loc.type).to.eql('Point');
@@ -34,13 +34,13 @@ describe('cellocator-parzer', () => {
   });
 
   it('should return a valid data cellocator', () => {
-    const raw = new Buffer('4d43475000bdda0b0000060ddf20041017002000e3c40000baeff3c6b6224502000000000000ea65000402090daec5f7cb302cff3357000038090000930a002a170c03e007c1');
+    const raw = new Buffer('4d43475000bdda0b0000060ddf20041017002000e3c40000baeff3c6b6224502000000000000ea65000402090daec5f7cb302cff3357000038090000930a002a170c03e007c1', 'hex');
     const data = lib.isCello(raw);
     expect(data).to.be.true;
   });
 
   it('should return a valid imei', () => {
-    const raw = new Buffer('4d43475000aac30c00000afc4e2104161d002001c30400002a69e193b600000042f7830fea440000a00000000000000000000000000000000000000000001f13111106e007a4');
+    const raw = new Buffer('4d43475000aac30c00000afc4e2104161d002001c30400002a69e193b600000042f7830fea440000a00000000000000000000000000000000000000000001f13111106e007a4', 'hex');
     const data = lib.getImei(raw);
     expect(data).to.eql(357247050053442);
   });
