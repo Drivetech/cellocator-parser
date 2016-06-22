@@ -1,3 +1,9 @@
+#### 0.1.2 (2016-6-22)
+
+##### Bug Fixes
+
+* **datetime:** Return null if datetime is invalid ([6c042719](https://github.com/lgaticaq/cellocator-parser/commit/6c0427197870ebb676efd82df82dd23f15f47f27))
+
 #### 0.1.1 (2016-6-21)
 
 ##### Chores
