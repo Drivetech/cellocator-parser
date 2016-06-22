@@ -1,3 +1,10 @@
+### 0.2.0 (2016-6-22)
+
+##### Chores
+
+* **commands:** Add get ACK command ([93d4ed43](https://github.com/lgaticaq/cellocator-parser/commit/93d4ed4305342f834b2a4923a4f1d3ce27f25032))
+* **parser:** Add unitId in response ([65d725d1](https://github.com/lgaticaq/cellocator-parser/commit/65d725d14d9b4dbf8f75398f2e58a98066f63aeb))
+
 #### 0.1.2 (2016-6-22)
 
 ##### Bug Fixes
