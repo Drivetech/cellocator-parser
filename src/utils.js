@@ -139,7 +139,8 @@ exports.parseGpsTime = (bytefrom39to40, seconds) => {
   const day = `00${convertBase(data.substr(0, 5), 2, 10)}`.substr(-2);
   const hours = `00${convertBase(data.substr(5, 5), 2, 10)}`.substr(-2);
   const minutes = `00${convertBase(data.substr(10, 6), 2, 10)}`.substr(-2);
-  return moment(`${now}-${day} ${hours}:${minutes}:${seconds}`).toISOString();
+  const datetime = moment(`${now}-${day} ${hours}:${minutes}:${seconds}`);
+  return datetime.isValid() ? datetime.toISOString() : null;
 };
 
 exports.parseLocationStatus = byte41 => hex2bin(byte41);
@@ -250,14 +251,15 @@ exports.parseSpeed = bytes57To60 => convertBase(reverseHex(bytes57To60), 16, 10)
 exports.parseDirection = bytes61To62 => convertBase(reverseHex(bytes61To62), 16, 10) * (180 / Math.PI) * 0.001;
 
 exports.parseDatetime = (bytes68To69, byte67, byte66, byte65, byte64, byte63) => {
-  const year = convertBase(reverseHex(bytes68To69), 16, 10);
+  const year = lpad(convertBase(reverseHex(bytes68To69), 16, 10), 2);
   const month = lpad(convertBase(byte67, 16, 10), 2);
   const day = lpad(convertBase(byte66, 16, 10), 2);
   const hour = lpad(convertBase(byte65, 16, 10), 2);
   const minute = lpad(convertBase(byte64, 16, 10), 2);
   const second = lpad(convertBase(byte63, 16, 10), 2);
   const date = `${year}${month}${day}${hour}${minute}${second}`;
-  return moment(`${date}+00:00`, 'YYYYMMDDHHmmssZZ').toISOString();
+  const datetime = moment(`${date}+00:00`, 'YYYYMMDDHHmmssZZ');
+  return datetime.isValid() ? datetime.toISOString() : null;
 };
 
 const checksum = trama => {
