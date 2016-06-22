@@ -10,6 +10,7 @@ const getData = raw => {
   const bytes = raw.toString('hex').split(/([A-F0-9]{2})/i).filter(x => x !== '');
   const seconds = bytes[62];
   const messageType = utils.parseMessageType(bytes[4]);
+  const unitId = utils.parseUnitsId(bytes.slice(5, 9).join(''));
   const communication = utils.parseCommunication(bytes.slice(9, 11).join(''));
   const messageNumerator = utils.parseMessageNumerator(bytes[11]);
   const version = utils.parseVersion(bytes[12], bytes[13]);
@@ -37,6 +38,7 @@ const getData = raw => {
   const datetime = utils.parseDatetime(bytes.slice(67, 69).join(''), bytes[66], bytes[65], bytes[64], bytes[63], bytes[62]);
   const data = {
     raw: bytes.join(''),
+    unitId: unitId,
     imei: imei,
     device: 'CelloTrack',
     type: 'data',
