@@ -1,3 +1,9 @@
+#### 0.2.1 (2016-6-22)
+
+##### Bug Fixes
+
+* **pattern:** Fix pattern message ([b69398bd](https://github.com/lgaticaq/cellocator-parser/commit/b69398bd2188708ee4696942f65e1c435f96d1b8))
+
 ### 0.2.0 (2016-6-22)
 
 ##### Chores
