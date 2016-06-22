@@ -45,4 +45,12 @@ describe('cellocator-parzer', () => {
     const data = lib.getImei(raw);
     expect(data).to.eql(357247050053442);
   });
+
+  it('should return a ACK command', () => {
+    const unitId = 836522;
+    const commandNumerator = 1;
+    const messageNumerator = 80;
+    const ack = lib.ack(unitId, commandNumerator, messageNumerator);
+    expect(ack).to.eql(new Buffer('4D43475004AAC30C00010000000000500000000000000000000000CE', 'hex'));
+  });
 });

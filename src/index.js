@@ -1,6 +1,7 @@
 'use strict';
 
 const utils = require('./utils');
+const inbound = require('./inbound');
 
 const patterns = {
   data: /^([A-F0-9]{140})$/i
@@ -124,5 +125,6 @@ module.exports = {
   parse: parse,
   patterns: patterns,
   isCello: isCello,
-  getImei: getImei
+  getImei: getImei,
+  ack: inbound.ack
 };
