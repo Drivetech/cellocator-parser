@@ -4,7 +4,7 @@ const utils = require('./utils');
 const inbound = require('./inbound');
 
 const patterns = {
-  data: /^([A-F0-9]{140})$/i
+  data: /^[A-F0-9]+$/i
 };
 
 const getData = raw => {
