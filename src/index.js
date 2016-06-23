@@ -4,7 +4,7 @@ const utils = require('./utils');
 const inbound = require('./inbound');
 
 const patterns = {
-  data: /^[A-F0-9]+$/i
+  data: /(4d434750[A-F0-9]{132})/gi
 };
 
 const getData = raw => {
@@ -101,9 +101,11 @@ const getData = raw => {
 };
 
 const parse = raw => {
-  let result = {type: 'UNKNOWN', raw: raw.toString('hex')};
-  if (patterns.data.test(raw.toString('hex'))) {
-    result = getData(raw);
+  const rawString = raw.toString('hex');
+  let result = {type: 'UNKNOWN', raw: rawString};
+  if (patterns.data.test(rawString)) {
+    result = rawString.split(patterns.data).filter(x => patterns.data.test(x)).map(getData);
+    if (result.length === 1) result = result[0];
   }
   return result;
 };
