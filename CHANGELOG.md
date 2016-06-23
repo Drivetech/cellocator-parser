@@ -1,3 +1,9 @@
+#### 0.2.2 (2016-6-23)
+
+##### Bug Fixes
+
+* **parser:** Fix parse in multiple raw data in same buffer ([d9acb387](https://github.com/lgaticaq/cellocator-parser/commit/d9acb387ef97b6b24c3ba68ca3230df1fe803190))
+
 #### 0.2.1 (2016-6-22)
 
 ##### Bug Fixes
