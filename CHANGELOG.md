@@ -1,3 +1,9 @@
+#### 1.0.2 (2016-6-24)
+
+##### Bug Fixes
+
+* **patterns:** Fix patterns for input raw data ([4f41f5ab](https://github.com/lgaticaq/cellocator-parser/commit/4f41f5ab169c200930b5495423adec9492d61eb0))
+
 #### 1.0.1 (2016-6-24)
 
 ##### Bug Fixes
