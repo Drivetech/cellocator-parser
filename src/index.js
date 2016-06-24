@@ -8,20 +8,21 @@ const Promise = require('bluebird');
 let _client;
 
 const patterns = {
-  data: /(4d434750[A-F0-9]{132})/gi
+  multi: /(4d434750[A-F0-9]{132})/gi,
+  data: /(4d434750[A-F0-9]{132})/i
 };
 
 const parse = raw => {
   return new Promise((resolve, reject) => {
     const rawString = raw.toString('hex');
     if (!patterns.data.test(rawString)) resolve({type: 'UNKNOWN', raw: rawString});
-    const results = rawString.split(patterns.data).filter(x => patterns.data.test(x)).map(utils.getData);
+    const results = rawString.split(patterns.multi).filter(x => patterns.data.test(x)).map(utils.getData);
     if (!_client) {
       if (results.length === 1) resolve(results[0]);
       resolve(results);
     }
     _client.getAsync(`incompleteData:${results[0].unitId}`).then(reply => {
-      const incompleteData = rawString.split(patterns.data).filter(x => !patterns.data.test(x) && x !== '');
+      const incompleteData = rawString.split(patterns.multi).filter(x => !patterns.data.test(x) && x !== '');
       if (incompleteData.length > 0) {
         if (reply) {
           let previousData = '';
