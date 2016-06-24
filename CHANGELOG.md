@@ -1,3 +1,9 @@
+## 1.0.0 (2016-6-24)
+
+##### New Features
+
+* **parser:** Add support to save incomplete data. Now response a promise in method parse. ([2c7f006b](https://github.com/lgaticaq/cellocator-parser/commit/2c7f006b42758591255e5d083268f79e6a9c1d32))
+
 #### 0.2.2 (2016-6-23)
 
 ##### Bug Fixes
