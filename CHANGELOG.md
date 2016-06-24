@@ -1,3 +1,9 @@
+#### 1.0.1 (2016-6-24)
+
+##### Bug Fixes
+
+* **package:** Add bluebird ([f1e85e64](https://github.com/lgaticaq/cellocator-parser/commit/f1e85e645e3367e33d70d8662681e2da39d5b266))
+
 ## 1.0.0 (2016-6-24)
 
 ##### New Features
