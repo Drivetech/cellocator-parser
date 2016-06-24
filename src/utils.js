@@ -11,11 +11,7 @@ const convertBase = (data, fromBase , toBase) => {
 };
 exports.convertBase = convertBase;
 
-const hex2Ascii = data => data.split(/([A-F0-9]{2})/i).filter(x => x !== '').map(x => String.fromCharCode(parseInt(x, 16))).join('');
-exports.hex2Ascii = hex2Ascii;
-
-const ascii2hex = data => data.split('').map(x => x.charCodeAt(0).toString(16).toUpperCase()).join('');
-exports.ascii2hex = ascii2hex;
+exports.ascii2hex = data => data.split('').map(x => x.charCodeAt(0).toString(16).toUpperCase()).join('');
 
 const reverseHex = data => {
   data = data.toUpperCase();
@@ -29,13 +25,11 @@ exports.lpad = lpad;
 
 const hex2bin = data => lpad(convertBase(data, 16, 2), data.length * 4);
 
-exports.parseSystemCode = bytes1To4 => hex2Ascii(bytes1To4);
+const parseMessageType = byte5 => convertBase(byte5, 16, 10);
 
-exports.parseMessageType = byte5 => convertBase(byte5, 16, 10);
+const parseUnitsId = bytes6To9 => convertBase(reverseHex(bytes6To9), 16, 10);
 
-exports.parseUnitsId = bytes6To9 => convertBase(reverseHex(bytes6To9), 16, 10);
-
-exports.parseCommunication = bytes10To11 => {
+const parseCommunication = bytes10To11 => {
   const byte10 = hex2bin(bytes10To11.substring(0, 2));
   const byte11 = hex2bin(bytes10To11.substring(2, 4));
   return {
@@ -53,7 +47,7 @@ exports.parseCommunication = bytes10To11 => {
   };
 };
 
-exports.parseMessageNumerator = byte12 => convertBase(byte12, 16, 10);
+const parseMessageNumerator = byte12 => convertBase(byte12, 16, 10);
 
 const parseHardware = byte13 => {
   const data = hex2bin(byte13);
@@ -65,11 +59,11 @@ const parseHardware = byte13 => {
 
 const parseSoftware = byte14 => convertBase(byte14, 16, 10);
 
-exports.parseVersion = (byte13, byte14) => `HW: <${parseHardware(byte13)}>, SW: <${parseSoftware(byte14)}>`;
+const parseVersion = (byte13, byte14) => `HW: <${parseHardware(byte13)}>, SW: <${parseSoftware(byte14)}>`;
 
-exports.protocolVersionIdentifier = byte15 => convertBase(byte15, 16, 10);
+const protocolVersionIdentifier = byte15 => convertBase(byte15, 16, 10);
 
-exports.parseUnitsStatusCurrentGsmOperator = byte16 => {
+const parseUnitsStatusCurrentGsmOperator = byte16 => {
   const firstnibble = byte16[0];
   const unitsstatus = convertBase(byte16[1], 16, 2);
   return {
@@ -81,15 +75,15 @@ exports.parseUnitsStatusCurrentGsmOperator = byte16 => {
   };
 };
 
-exports.parseCurrentGsmOperator = byte17 => byte17;
+const parseCurrentGsmOperator = byte17 => byte17;
 
-exports.parseTransmissionReasonSpecificData = byte18 => convertBase(byte18, 16, 10);
+const parseTransmissionReasonSpecificData = byte18 => convertBase(byte18, 16, 10);
 
-exports.parseTransmissionReason = byte19 => convertBase(byte19, 16, 10);
+const parseTransmissionReason = byte19 => convertBase(byte19, 16, 10);
 
-exports.parseEngineStatus = byte20 => convertBase(byte20, 16, 10);
+const parseEngineStatus = byte20 => convertBase(byte20, 16, 10);
 
-exports.parseIO = bytes21To24 => {
+const parseIO = bytes21To24 => {
   const byte21 = hex2bin(bytes21To24.substring(0, 2));
   const byte22 = hex2bin(bytes21To24.substring(2, 4));
   const byte23 = hex2bin(bytes21To24.substring(4, 6));
@@ -113,26 +107,26 @@ exports.parseIO = bytes21To24 => {
   };
 };
 
-exports.parsePlmn = (byte25, currentGsmOperator1stNibble, currentGsmOperator) => {
+const parsePlmn = (byte25, currentGsmOperator1stNibble, currentGsmOperator) => {
   return convertBase(`${currentGsmOperator1stNibble}${currentGsmOperator}${byte25}`, 16, 10);
 };
 
-exports.parseAnalogInput1 = byte26 => convertBase(byte26, 16, 10) * 0.1176470588235;
+const parseAnalogInput1 = byte26 => convertBase(byte26, 16, 10) * 0.1176470588235;
 
-exports.parseAnalogInput2 = byte27 => convertBase(byte27, 16, 10) * 0.01647058823;
+const parseAnalogInput2 = byte27 => convertBase(byte27, 16, 10) * 0.01647058823;
 
-exports.parseAnalogInput3 = byte28 => (convertBase(byte28, 16, 10) * 0.4314) - 40;
+const parseAnalogInput3 = byte28 => (convertBase(byte28, 16, 10) * 0.4314) - 40;
 
-exports.parseAnalogInput4 = byte29 => convertBase(byte29, 16, 10);
+const parseAnalogInput4 = byte29 => convertBase(byte29, 16, 10);
 
-exports.parseMileageCounter = bytes30To32 => convertBase(reverseHex(bytes30To32), 16, 10);
+const parseMileageCounter = bytes30To32 => convertBase(reverseHex(bytes30To32), 16, 10);
 
-exports.multiPurposeField = (bytes33To38, byte41) => {
+const multiPurposeField = (bytes33To38, byte41) => {
   const ms4And5From41 = hex2bin(byte41).substring(1, 3);
   return parseInt(`${ms4And5From41}${hex2bin(reverseHex(bytes33To38))}`, 2);
 };
 
-exports.parseGpsTime = (bytefrom39to40, seconds) => {
+const parseGpsTime = (bytefrom39to40, seconds) => {
   seconds = lpad(convertBase(seconds, 16, 10), 2);
   const now = moment().format('YYYY-MM');
   const data = hex2bin(reverseHex(bytefrom39to40));
@@ -143,13 +137,13 @@ exports.parseGpsTime = (bytefrom39to40, seconds) => {
   return datetime.isValid() ? datetime.toISOString() : null;
 };
 
-exports.parseLocationStatus = byte41 => hex2bin(byte41);
+const parseLocationStatus = byte41 => hex2bin(byte41);
 
 /*
 With Normal PMODE Filter settings, PMODE valid is 2 to 6
 With Tide PMODE Filter settings PMODE valid 3 or 4
 */
-exports.parseMode1 = byte42 => {
+const parseMode1 = byte42 => {
   const pModes = {
     '0': 'No navigation solution',
     '1': '1 satellite solution',
@@ -193,7 +187,7 @@ exports.parseMode1 = byte42 => {
   };
 };
 
-exports.parseMode2 = byte43 => {
+const parseMode2 = byte43 => {
   const modes = {
     '00': 'Solution not validated',
     '01': 'DR Sensor Data',
@@ -208,7 +202,7 @@ exports.parseMode2 = byte43 => {
   return byte43 in modes ? modes[byte43] : null;
 };
 
-exports.parseSatellites = byte44 => convertBase(byte44, 16, 10);
+const parseSatellites = byte44 => convertBase(byte44, 16, 10);
 
 const notBinaryData = data => data.split('').map(x => x === '1' ? '0' : '1').join('');
 
@@ -237,20 +231,20 @@ const parseLongitude = bytes49To52 => {
   return lng;
 };
 
-exports.parseLoc = (bytes45To48, bytes49To52) => {
+const parseLoc = (bytes45To48, bytes49To52) => {
   return {
     type: 'Point',
     coordinates: [parseLongitude(bytes45To48), parseLatitude(bytes49To52)]
   };
 };
 
-exports.parseAltitude = bytes53To56 => convertBase(reverseHex(bytes53To56), 16, 10) * 0.01;
+const parseAltitude = bytes53To56 => convertBase(reverseHex(bytes53To56), 16, 10) * 0.01;
 
-exports.parseSpeed = bytes57To60 => convertBase(reverseHex(bytes57To60), 16, 10) * 0.036;
+const parseSpeed = bytes57To60 => convertBase(reverseHex(bytes57To60), 16, 10) * 0.036;
 
-exports.parseDirection = bytes61To62 => convertBase(reverseHex(bytes61To62), 16, 10) * (180 / Math.PI) * 0.001;
+const parseDirection = bytes61To62 => convertBase(reverseHex(bytes61To62), 16, 10) * (180 / Math.PI) * 0.001;
 
-exports.parseDatetime = (bytes68To69, byte67, byte66, byte65, byte64, byte63) => {
+const parseDatetime = (bytes68To69, byte67, byte66, byte65, byte64, byte63) => {
   const year = lpad(convertBase(reverseHex(bytes68To69), 16, 10), 2);
   const month = lpad(convertBase(byte67, 16, 10), 2);
   const day = lpad(convertBase(byte66, 16, 10), 2);
@@ -268,6 +262,107 @@ const checksum = trama => {
 };
 exports.checksum = checksum;
 
-exports.validate = (byte70, bytes4To69) => {
+const validate = (byte70, bytes4To69) => {
   return checksum(bytes4To69) === byte70;
+};
+
+exports.getData = raw => {
+  const bytes = raw.toString('hex').split(/([A-F0-9]{2})/i).filter(x => x !== '');
+  const seconds = bytes[62];
+  const messageType = parseMessageType(bytes[4]);
+  const unitId = parseUnitsId(bytes.slice(5, 9).join(''));
+  const communication = parseCommunication(bytes.slice(9, 11).join(''));
+  const messageNumerator = parseMessageNumerator(bytes[11]);
+  const version = parseVersion(bytes[12], bytes[13]);
+  const transmissionReason = parseTransmissionReason(bytes[18]);
+  const engine = parseEngineStatus(bytes[19]);
+  const io = parseIO(bytes.slice(20, 24).join(''));
+  const unitsStatusCurrentGsmOperator = parseUnitsStatusCurrentGsmOperator(bytes[15]);
+  const currentGsmOperator = parseCurrentGsmOperator(bytes[16]);
+  const plmn = parsePlmn(bytes[24], unitsStatusCurrentGsmOperator.currentGsmOperator1stNibble, currentGsmOperator);
+  const analog1 = parseAnalogInput1(bytes[25]);
+  const analog2 = parseAnalogInput2(bytes[26]);
+  const analog3 = parseAnalogInput3(bytes[27]);
+  const analog4 = parseAnalogInput4(bytes[28]);
+  const odometer = parseMileageCounter(bytes.slice(29, 32).join(''));
+  const imei = multiPurposeField(bytes.slice(32, 38).join(''), bytes[40]);
+  const gpsTime = parseGpsTime(bytes.slice(38, 40).join(''), seconds);
+  const locationStatus = parseLocationStatus(bytes[40]);
+  const mode1 = parseMode1(bytes[41]);
+  const mode2 = parseMode2(bytes[42]);
+  const satellites = parseSatellites(bytes[43]);
+  const loc = parseLoc(bytes.slice(44, 48).join(''), bytes.slice(48, 52).join(''));
+  const altitude = parseAltitude(bytes.slice(52, 56).join(''));
+  const speed = parseSpeed(bytes.slice(56, 60).join(''));
+  const direction = parseDirection(bytes.slice(60, 62).join(''));
+  const datetime = parseDatetime(bytes.slice(67, 69).join(''), bytes[66], bytes[65], bytes[64], bytes[63], bytes[62]);
+  const data = {
+    raw: bytes.join(''),
+    unitId: unitId,
+    imei: imei,
+    device: 'CelloTrack',
+    type: 'data',
+    loc: loc,
+    speed: speed,
+    datetime: datetime,
+    gpsTime: gpsTime,
+    direction: direction,
+    satellites: satellites,
+    voltage: {
+      ada: analog1,
+      adb: analog2,
+      adc: analog3,
+      add: analog4
+    },
+    altitude: altitude,
+    status: {
+      engine: engine === 1,
+      unlockInactive: io.unlockInactive,
+      panicInactive: io.panicInactive,
+      drivingStatus: io.drivingStatus,
+      shockInactive: io.shockInactive,
+      doorInactive: io.doorInactive,
+      ignitionPortStatus: io.ignitionPortStatus,
+      accelerometerStatus: io.accelerometerStatus,
+      lock: io.lock,
+      noHibernation: communication.noHibernation,
+      momentarySpeed: communication.momentarySpeed,
+      privateMode: communication.privateMode,
+      firmwareSubversion: communication.firmwareSubversion,
+      canOriginatedOdometer: communication.canOriginatedOdometer,
+      canOriginatedSpeed: communication.canOriginatedSpeed,
+      dataType33_38: communication.dataType33_38,
+      messageSource: communication.messageSource,
+      garminConnected: communication.garminConnected,
+      garminEnable: communication.garminEnable,
+      messageInitiative: communication.messageInitiative,
+      locationStatus: locationStatus,
+      charge: io.charge,
+      standardImmobilizer: io.standardImmobilizer,
+      globalOutput: io.globalOutput,
+      ledOut: io.ledOut,
+      gpsPower: io.gpsPower,
+      gradualStop: io.gradualStop,
+      siren: io.siren
+    },
+    version: version,
+    protocolVersionIdentifier: protocolVersionIdentifier(bytes[14]),
+    transmissionReason: transmissionReason,
+    transmissionReasonSpecificData: parseTransmissionReasonSpecificData(bytes[17]),
+    odometer: odometer,
+    gpsModes: {
+      '1': mode1,
+      '2': mode2
+    },
+    plmn: plmn,
+    sn: messageNumerator,
+    messageType: messageType,
+    valid: validate(bytes[69], bytes.slice(3, 69).join(''))
+  };
+  return data;
+};
+
+exports.getImei = raw => {
+  const bytes = raw.toString('hex').split(/([A-F0-9]{2})/i).filter(x => x !== '');
+  return multiPurposeField(bytes.slice(32, 38).join(''), bytes[40]);
 };

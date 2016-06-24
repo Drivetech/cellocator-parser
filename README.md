@@ -23,9 +23,10 @@ npm i -S cellocator-parser
 const cellocator = require('cellocator-parser');
 
 const raw = new Buffer('4d43475000bdda0b0000060ddf20041017002000e3c40000baeff3c6b6224502000000000000ea65000402090daec5f7cb302cff3357000038090000930a002a170c03e007c1', 'hex');
-const data = cellocator.parse(raw);
+cellocator.parse(raw).then(result => console.log(result));
 /*{
   raw: '4d43475000bdda0b0000060ddf20041017002000e3c40000baeff3c6b6224502000000000000ea65000402090daec5f7cb302cff3357000038090000930a002a170c03e007c1',
+  unitId: 776893,
   imei: 0,
   device: 'CelloTrack',
   type: 'data',
