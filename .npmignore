@@ -2,6 +2,4 @@ node_modules
 test
 .*
 LICENSE
-example.js
 coverage
-*.md
