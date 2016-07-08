@@ -23,7 +23,7 @@ npm i -S cellocator-parser
 const cellocator = require('cellocator-parser');
 
 const raw = new Buffer('4d43475000bdda0b0000060ddf20041017002000e3c40000baeff3c6b6224502000000000000ea65000402090daec5f7cb302cff3357000038090000930a002a170c03e007c1', 'hex');
-cellocator.parse(raw).then(result => console.log(result));
+const data = cellocator.parse(raw);
 /*{
   raw: '4d43475000bdda0b0000060ddf20041017002000e3c40000baeff3c6b6224502000000000000ea65000402090daec5f7cb302cff3357000038090000930a002a170c03e007c1',
   unitId: 776893,
@@ -36,7 +36,7 @@ cellocator.parse(raw).then(result => console.log(result));
   },
   speed: 84.96,
   datetime: '2016-03-12T23:42:00.000Z',
-  gpsTime: '2016-06-12T23:42:00.000Z',
+  gpsTime: '2016-07-12T23:42:00.000Z',
   direction: 155.09967514191385,
   satellites: 9,
   voltage: {
@@ -47,15 +47,29 @@ cellocator.parse(raw).then(result => console.log(result));
   },
   altitude: 223.23000000000002,
   status: {
+    sos: false,
+    input: {
+      '1': false,
+      '2': false,
+      '3': false,
+      '4': false,
+      '5': true
+    },
+    output: {
+      '1': false,
+      '2': false,
+      '3': false,
+      '4': false,
+      '5': false,
+      '6': false
+    },
+    charge: false,
     engine: false,
-    unlockInactive: true,
-    panicInactive: true,
-    drivingStatus: true,
-    shockInactive: true,
-    doorInactive: true,
-    ignitionPortStatus: true,
-    accelerometerStatus: true,
-    lock: true,
+    driving: false,
+    accelerometer: true,
+    gpsPower: false
+  },
+  communication: {
     noHibernation: false,
     momentarySpeed: false,
     privateMode: false,
@@ -66,18 +80,22 @@ cellocator.parse(raw).then(result => console.log(result));
     messageSource: '0',
     garminConnected: false,
     garminEnable: false,
-    messageInitiative: false,
-    locationStatus: '00000000',
-    charge: false,
-    standardImmobilizer: false,
-    globalOutput: false,
-    ledOut: false,
-    gpsPower: false,
-    gradualStop: false,
-    siren: false
+    messageInitiative: false
   },
-  version: 'HW: <223>, SW: <32>',
+  locationStatus: {
+    GNSSAntennaSelected: 'internal',
+    trailer: false,
+    CFEType: 'Not Applicable'
+  },
+  hardware: {
+    id: 31,
+    model: 'Cello-IQ',
+    modem: 'Telit GE864, automative'
+  },
+  software: 32,
+  protocol: 4,
   transmissionReason: 32,
+  transmissionReasonSpecificData: 0,
   odometer: 148770,
   gpsModes: {
     '1': {
@@ -91,7 +109,8 @@ cellocator.parse(raw).then(result => console.log(result));
   },
   plmn: 71610,
   sn: 13,
-  messageType: 0
+  messageType: 0,
+  valid: true
 }*/
 ```
 

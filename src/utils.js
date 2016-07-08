@@ -54,14 +54,18 @@ const parseHardware = byte13 => {
   const modem  = convertBase(data.substr(0, 3), 2, 10);
   const model = convertBase(data.substr(3, 5), 2, 10);
   const hardware = hardwares.find(x => x.model.id === model && x.modem.code === modem);
-  return hardware ? hardware.id : '';
+  return {
+    id: hardware.model.id,
+    model: hardware.model.name,
+    modem: hardware.modem.name
+  };
 };
 
-const parseSoftware = byte14 => convertBase(byte14, 16, 10);
+const parseSoftware = byte14 => {
+  return convertBase(byte14, 16, 10);
+};
 
-const parseVersion = (byte13, byte14) => `HW: <${parseHardware(byte13)}>, SW: <${parseSoftware(byte14)}>`;
-
-const protocolVersionIdentifier = byte15 => convertBase(byte15, 16, 10);
+const protocolVersion = byte15 => convertBase(byte15, 16, 10);
 
 const parseUnitsStatusCurrentGsmOperator = byte16 => {
   const firstnibble = byte16[0];
@@ -81,7 +85,7 @@ const parseTransmissionReasonSpecificData = byte18 => convertBase(byte18, 16, 10
 
 const parseTransmissionReason = byte19 => convertBase(byte19, 16, 10);
 
-const parseEngineStatus = byte20 => convertBase(byte20, 16, 10);
+const parseEngineStatus = byte20 => convertBase(byte20, 16, 10) === 1;
 
 const parseIO = bytes21To24 => {
   const byte21 = hex2bin(bytes21To24.substring(0, 2));
@@ -89,20 +93,21 @@ const parseIO = bytes21To24 => {
   const byte23 = hex2bin(bytes21To24.substring(4, 6));
   const byte24 = hex2bin(bytes21To24.substring(6, 8));
   return {
-    unlockInactive: byte21[0] === '1',
-    panicInactive: byte21[1] === '1',
-    drivingStatus: byte21[2] === '1',
-    shockInactive: byte21[6] === '1',
-    doorInactive: byte21[7] === '1',
-    ignitionPortStatus: byte22[0] === '1',
-    accelerometerStatus: byte22[1] === '1',
-    lock: byte22[5] === '1',
+    unlock: byte21[0] === '0',
+    sos: byte21[1] === '0',
+    driving: byte21[2] === '0',
+    shock: byte21[6] === '0',
+    door: byte21[7] === '0',
+    ignition: byte22[0] === '1',
+    accelerometer: byte22[1] === '1',
+    lock: byte22[5] === '0',
     gpsPower: byte23[4] === '1',
     gradualStop: byte23[5] === '1',
     siren: byte23[6] === '1',
+    cfeOut1: byte23[7] === '1',
     charge: byte24[0] === '1',
     standardImmobilizer: byte24[2] === '1',
-    globalOutput: byte24[4] === '1',
+    blinker: byte24[4] === '1',
     ledOut: byte24[7] === '1'
   };
 };
@@ -137,7 +142,23 @@ const parseGpsTime = (bytefrom39to40, seconds) => {
   return datetime.isValid() ? datetime.toISOString() : null;
 };
 
-const parseLocationStatus = byte41 => hex2bin(byte41);
+const parseLocationStatus = byte41 => {
+  const data = hex2bin(byte41);
+  const CFETypes = {
+    '000': 'Not Applicable',
+    '001': 'CFE is not connected',
+    '010': 'CFE BT is connected',
+    '011': 'CFE Basic is connected',
+    '100': 'CFE I/O is connected',
+    '101': 'CFE premium is connected',
+    '111': 'Undefined CFE Type'
+  };
+  return {
+    GNSSAntennaSelected: data[7] === '0' ? 'internal' : 'external',
+    trailer: data[6] === '1',
+    CFEType: CFETypes[data.substring(3, 6)]
+  };
+};
 
 /*
 With Normal PMODE Filter settings, PMODE valid is 2 to 6
@@ -258,108 +279,79 @@ const parseDatetime = (bytes68To69, byte67, byte66, byte65, byte64, byte63) => {
 
 const checksum = trama => {
   const code = trama.split(/([A-F0-9]{2})/i).filter(x => x !== '').reduce((prev, curr) => prev + convertBase(curr, 16, 10), 0);
-  return `00${convertBase(code, 10, 16)}`.substr(-2);
+  return `00${convertBase(code, 10, 16)}`.toUpperCase().substr(-2);
 };
 exports.checksum = checksum;
 
 const validate = (byte70, bytes4To69) => {
-  return checksum(bytes4To69) === byte70;
+  return checksum(bytes4To69) === byte70.toUpperCase();
 };
 
 exports.getData = raw => {
   const bytes = raw.toString('hex').split(/([A-F0-9]{2})/i).filter(x => x !== '');
   const seconds = bytes[62];
-  const messageType = parseMessageType(bytes[4]);
-  const unitId = parseUnitsId(bytes.slice(5, 9).join(''));
-  const communication = parseCommunication(bytes.slice(9, 11).join(''));
-  const messageNumerator = parseMessageNumerator(bytes[11]);
-  const version = parseVersion(bytes[12], bytes[13]);
-  const transmissionReason = parseTransmissionReason(bytes[18]);
-  const engine = parseEngineStatus(bytes[19]);
   const io = parseIO(bytes.slice(20, 24).join(''));
   const unitsStatusCurrentGsmOperator = parseUnitsStatusCurrentGsmOperator(bytes[15]);
   const currentGsmOperator = parseCurrentGsmOperator(bytes[16]);
-  const plmn = parsePlmn(bytes[24], unitsStatusCurrentGsmOperator.currentGsmOperator1stNibble, currentGsmOperator);
-  const analog1 = parseAnalogInput1(bytes[25]);
-  const analog2 = parseAnalogInput2(bytes[26]);
-  const analog3 = parseAnalogInput3(bytes[27]);
-  const analog4 = parseAnalogInput4(bytes[28]);
-  const odometer = parseMileageCounter(bytes.slice(29, 32).join(''));
-  const imei = multiPurposeField(bytes.slice(32, 38).join(''), bytes[40]);
-  const gpsTime = parseGpsTime(bytes.slice(38, 40).join(''), seconds);
-  const locationStatus = parseLocationStatus(bytes[40]);
-  const mode1 = parseMode1(bytes[41]);
-  const mode2 = parseMode2(bytes[42]);
-  const satellites = parseSatellites(bytes[43]);
-  const loc = parseLoc(bytes.slice(44, 48).join(''), bytes.slice(48, 52).join(''));
-  const altitude = parseAltitude(bytes.slice(52, 56).join(''));
-  const speed = parseSpeed(bytes.slice(56, 60).join(''));
-  const direction = parseDirection(bytes.slice(60, 62).join(''));
-  const datetime = parseDatetime(bytes.slice(67, 69).join(''), bytes[66], bytes[65], bytes[64], bytes[63], bytes[62]);
-  const data = {
+  return {
     raw: bytes.join(''),
-    unitId: unitId,
-    imei: imei,
+    unitId: parseUnitsId(bytes.slice(5, 9).join('')),
+    imei: multiPurposeField(bytes.slice(32, 38).join(''), bytes[40]),
     device: 'CelloTrack',
     type: 'data',
-    loc: loc,
-    speed: speed,
-    datetime: datetime,
-    gpsTime: gpsTime,
-    direction: direction,
-    satellites: satellites,
+    loc: parseLoc(bytes.slice(44, 48).join(''), bytes.slice(48, 52).join('')),
+    speed: parseSpeed(bytes.slice(56, 60).join('')),
+    datetime: parseDatetime(bytes.slice(67, 69).join(''), bytes[66], bytes[65], bytes[64], bytes[63], bytes[62]),
+    gpsTime: parseGpsTime(bytes.slice(38, 40).join(''), seconds),
+    direction: parseDirection(bytes.slice(60, 62).join('')),
+    satellites: parseSatellites(bytes[43]),
     voltage: {
-      ada: analog1,
-      adb: analog2,
-      adc: analog3,
-      add: analog4
+      ada: parseAnalogInput1(bytes[25]),
+      adb: parseAnalogInput2(bytes[26]),
+      adc: parseAnalogInput3(bytes[27]),
+      add: parseAnalogInput4(bytes[28])
     },
-    altitude: altitude,
+    altitude: parseAltitude(bytes.slice(52, 56).join('')),
     status: {
-      engine: engine === 1,
-      unlockInactive: io.unlockInactive,
-      panicInactive: io.panicInactive,
-      drivingStatus: io.drivingStatus,
-      shockInactive: io.shockInactive,
-      doorInactive: io.doorInactive,
-      ignitionPortStatus: io.ignitionPortStatus,
-      accelerometerStatus: io.accelerometerStatus,
-      lock: io.lock,
-      noHibernation: communication.noHibernation,
-      momentarySpeed: communication.momentarySpeed,
-      privateMode: communication.privateMode,
-      firmwareSubversion: communication.firmwareSubversion,
-      canOriginatedOdometer: communication.canOriginatedOdometer,
-      canOriginatedSpeed: communication.canOriginatedSpeed,
-      dataType33_38: communication.dataType33_38,
-      messageSource: communication.messageSource,
-      garminConnected: communication.garminConnected,
-      garminEnable: communication.garminEnable,
-      messageInitiative: communication.messageInitiative,
-      locationStatus: locationStatus,
+      sos: io.sos,
+      input: {
+        '1': io.door,
+        '2': io.shock,
+        '3': io.unlock,
+        '4': io.lock,
+        '5': io.ignition
+      },
+      output: {
+        '1': io.blinker,
+        '2': io.siren,
+        '3': io.standardImmobilizer,
+        '4': io.gradualStop,
+        '5': io.ledOut,
+        '6': io.cfeOut1
+      },
       charge: io.charge,
-      standardImmobilizer: io.standardImmobilizer,
-      globalOutput: io.globalOutput,
-      ledOut: io.ledOut,
-      gpsPower: io.gpsPower,
-      gradualStop: io.gradualStop,
-      siren: io.siren
+      engine: parseEngineStatus(bytes[19]),
+      driving: io.driving,
+      accelerometer: io.accelerometer,
+      gpsPower: io.gpsPower
     },
-    version: version,
-    protocolVersionIdentifier: protocolVersionIdentifier(bytes[14]),
-    transmissionReason: transmissionReason,
+    communication: parseCommunication(bytes.slice(9, 11).join('')),
+    locationStatus: parseLocationStatus(bytes[40]),
+    hardware: parseHardware(bytes[12]),
+    software: parseSoftware(bytes[13]),
+    protocol: protocolVersion(bytes[14]),
+    transmissionReason: parseTransmissionReason(bytes[18]),
     transmissionReasonSpecificData: parseTransmissionReasonSpecificData(bytes[17]),
-    odometer: odometer,
+    odometer: parseMileageCounter(bytes.slice(29, 32).join('')),
     gpsModes: {
-      '1': mode1,
-      '2': mode2
+      '1': parseMode1(bytes[41]),
+      '2': parseMode2(bytes[42])
     },
-    plmn: plmn,
-    sn: messageNumerator,
-    messageType: messageType,
-    valid: validate(bytes[69], bytes.slice(3, 69).join(''))
+    plmn: parsePlmn(bytes[24], unitsStatusCurrentGsmOperator.currentGsmOperator1stNibble, currentGsmOperator),
+    sn: parseMessageNumerator(bytes[11]),
+    messageType: parseMessageType(bytes[4]),
+    valid: validate(bytes[69], bytes.slice(4, 69).join(''))
   };
-  return data;
 };
 
 exports.getImei = raw => {
