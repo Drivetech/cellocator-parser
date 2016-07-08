@@ -1,3 +1,13 @@
+## 2.0.0 (2016-7-8)
+
+##### Chores
+
+* **package:** Update dependencies ([20e13b82](https://github.com/lgaticaq/cellocator-parser/commit/20e13b8251e4367234af30fa455019a3541b1794))
+
+##### New Features
+
+* **parser:** Remove redis and add inputs and outputs with numbers. Order results. ([ed449234](https://github.com/lgaticaq/cellocator-parser/commit/ed4492349493be3c12fddb8a88ddbcc1d28af9a3))
+
 #### 1.0.2 (2016-6-24)
 
 ##### Bug Fixes
