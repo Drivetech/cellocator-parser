@@ -137,4 +137,12 @@ describe('cellocator-parser', () => {
     expect(results2[1].hardware.modem).to.eql('GE864-QUAD-V2');
     expect(results2[1].valid).to.be.true;
   });
+
+  it('should return a generic command', () => {
+    const unitId = 836522;
+    const commandNumerator = 1;
+    const messageNumerator = 80;
+    const ack = lib.ack(unitId, commandNumerator, messageNumerator);
+    expect(ack).to.eql(new Buffer('4D43475004AAC30C00010000000000500000000000000000000000CE', 'hex'));
+  });
 });
