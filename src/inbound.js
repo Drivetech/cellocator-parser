@@ -5,7 +5,7 @@ const commands = require('./commands');
 
 const genericCommand = (uId, commandNumeratorField, codefield, firsttwice) => {
   const systemCode = utils.ascii2hex('MCGP');
-  const messageType = utils.lpad(utils.convertBase('4', 10, 16));
+  const messageType = '00';
   const unitId = utils.reverseHex(utils.lpad(utils.convertBase(uId, 10, 16), 8));
   const commandNumerator = utils.lpad(utils.convertBase(commandNumeratorField > 255 ? 0 : commandNumeratorField, 10, 16), 2);
   const authenticationCode = '00000000';
@@ -40,7 +40,37 @@ exports.ack = (uId, commandNumerator, messageNumerator) => {
   return new Buffer(command, 'hex');
 };
 
-exports.getCommand = (unitId, commandNumeratorField, type) => {
-  const command = commands[type];
-  return genericCommand(unitId, commandNumeratorField, command.codeField, command.dataField);
+const parseIOCommand = instruction => {
+  const outputs = {
+    '1': {off: '04', on: '14'},
+    '2': {off: '00', on: '10'},
+    '3': {off: '05', on: '15'},
+    '4': {off: '03', on: '13'},
+    '5': {off: '08', on: '18'},
+    '6': {off: '09', on: '19'}
+  };
+  let data = instruction.split('_');
+  const port = data[0];
+  const state = data[1];
+  return {codeField: '03', dataField: outputs[port][state]};
+};
+
+const instructionParsers = data => {
+  let result = null;
+  const parsers = [
+    {regex: /^[1-5]{1}_(on|off)$/, parser: parseIOCommand},
+  ];
+  const parser = parsers.find(x => x.regex.test(data.instruction));
+  if (typeof parser === 'undefined') {
+    const command = commands[data.type];
+    if (typeof command !== 'undefined') result = command;
+  } else {
+    result = parser.parser(data.instruction);
+  }
+  return result;
+};
+
+exports.parseCommand = data => {
+  const command = instructionParsers(data);
+  return genericCommand(data.unitId, data.commandNumeratorField, command.codeField, command.dataField);
 };
