@@ -1,3 +1,20 @@
+### 2.1.0 (2016-8-11)
+
+##### Chores
+
+* **package:**
+  * Update dependencies ([00e4880d](https://github.com/lgaticaq/cellocator-parser/commit/00e4880dbcaa38ff52498fc92f21f643949da3af))
+  * update eslint to version 3.2.2 ([f0efef57](https://github.com/lgaticaq/cellocator-parser/commit/f0efef578d1cb6004699558ae0a5fee1349ba289))
+  * update mocha to version 3.0.0 ([49debf48](https://github.com/lgaticaq/cellocator-parser/commit/49debf4808ff15c4d83d67e74b2712b0675139a5))
+  * update eslint to version 3.2.0 ([889b2a3a](https://github.com/lgaticaq/cellocator-parser/commit/889b2a3ae4a776fe3566fd9473c642a4144827f7))
+  * update eslint to version 3.1.1 ([b8dd913f](https://github.com/lgaticaq/cellocator-parser/commit/b8dd913fe51e9dcbac25d714109920fef81941d2))
+  * update eslint to version 3.0.1 ([6a6c8bc6](https://github.com/lgaticaq/cellocator-parser/commit/6a6c8bc648b0e6348c90a13c6f449f21da304137))
+  * update eslint to version 3.0.0 ([9f66c07c](https://github.com/lgaticaq/cellocator-parser/commit/9f66c07c14ffb25d8e1b9526772ed78038413280))
+* **test:** Add new tests ([f413955e](https://github.com/lgaticaq/cellocator-parser/commit/f413955e773687d3d5593016a598753e9ca362bc))
+* **inbound:**
+  * Add parseCommand ([51d9a8ac](https://github.com/lgaticaq/cellocator-parser/commit/51d9a8ac45408e16d62f6b05b0332de0e0633f72))
+  * Add parseIOCommand and instructionParsers ([498a84c7](https://github.com/lgaticaq/cellocator-parser/commit/498a84c7bc4b83d04b0559080c3911c4d53a3105))
+
 ## 2.0.0 (2016-7-8)
 
 ##### Chores
