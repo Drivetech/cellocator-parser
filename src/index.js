@@ -42,5 +42,6 @@ module.exports = {
   patterns: patterns,
   isCello: isCello,
   getImei: utils.getImei,
-  ack: inbound.ack
+  ack: inbound.ack,
+  parseCommand: inbound.parseCommand
 };
