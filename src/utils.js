@@ -336,7 +336,7 @@ const getData = raw => {
       '2': parseMode2(bytes[42])
     },
     plmn: parsePlmn(bytes[24], unitsStatusCurrentGsmOperator.currentGsmOperator1stNibble, currentGsmOperator),
-    sn: parseMessageNumerator(bytes[11]),
+    serialId: parseMessageNumerator(bytes[11]),
     messageType: parseMessageType(bytes[4]),
     valid: validate(bytes[69], bytes.slice(4, 69).join(''))
   };

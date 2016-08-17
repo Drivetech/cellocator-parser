@@ -109,7 +109,7 @@ const data = cellocator.parse(raw);
     '2': 'Validated'
   },
   plmn: 71610,
-  sn: 13,
+  serialId: 13,
   messageType: 0,
   valid: true
 }*/
