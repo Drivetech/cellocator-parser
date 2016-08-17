@@ -29,6 +29,7 @@ const data = cellocator.parse(raw);
   unitId: 776893,
   imei: 0,
   device: 'CelloTrack',
+  alarm: {type: 'ConnectionUp'},
   type: 'data',
   loc: {
     type: 'Point',
