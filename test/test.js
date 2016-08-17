@@ -10,6 +10,7 @@ describe('cellocator-parser', () => {
     expect(data.raw).to.eql(raw.toString('hex'));
     expect(data.unitId).to.eql(776893);
     expect(data.device).to.eql('CelloTrack');
+    expect(data.alarm.type).to.eql('ConnectionUp');
     expect(data.type).to.eql('data');
     expect(data.loc.type).to.eql('Point');
     expect(data.loc.coordinates).to.eql([-79.09097658351084, -7.953307941260071]);
@@ -70,6 +71,7 @@ describe('cellocator-parser', () => {
     expect(results1[0].raw).to.eql(raw1.toString('hex').substr(0, 140));
     expect(results1[0].unitId).to.eql(1158328);
     expect(results1[0].device).to.eql('CelloTrack');
+    expect(results1[0].alarm.type).to.eql('Driving');
     expect(results1[0].type).to.eql('data');
     expect(results1[0].loc.type).to.eql('Point');
     expect(results1[0].loc.coordinates).to.eql([0, 0]);
@@ -106,6 +108,7 @@ describe('cellocator-parser', () => {
     expect(results2[1].raw).to.eql(raw1.toString('hex').substr(0, 140));
     expect(results2[1].unitId).to.eql(1158328);
     expect(results2[1].device).to.eql('CelloTrack');
+    expect(results2[1].alarm.type).to.eql('Driving');
     expect(results2[1].type).to.eql('data');
     expect(results2[1].loc.type).to.eql('Point');
     expect(results2[1].loc.coordinates).to.eql([0, 0]);

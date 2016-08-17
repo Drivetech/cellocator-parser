@@ -1,16 +1,17 @@
 'use strict';
 
+const core = require('./core');
 const utils = require('./utils');
 const commands = require('./commands');
 
 const genericCommand = (uId, commandNumeratorField, codefield, firsttwice) => {
   const systemCode = utils.ascii2hex('MCGP');
   const messageType = '00';
-  const unitId = utils.reverseHex(utils.lpad(utils.convertBase(uId, 10, 16), 8));
-  const commandNumerator = utils.lpad(utils.convertBase(commandNumeratorField > 255 ? 0 : commandNumeratorField, 10, 16), 2);
+  const unitId = utils.reverseHex(core.lpad(core.convertBase(uId, 10, 16), 8));
+  const commandNumerator = core.lpad(core.convertBase(commandNumeratorField > 255 ? 0 : commandNumeratorField, 10, 16), 2);
   const authenticationCode = '00000000';
-  const commandCodeField = utils.lpad(codefield, 4);
-  const firstCommandDataField = utils.lpad(firsttwice, 4);
+  const commandCodeField = core.lpad(codefield, 4);
+  const firstCommandDataField = core.lpad(firsttwice, 4);
   const secondCommandDataField = '0000';
   const commandSpecificDataField = '00000000';
   const trama = `${messageType}${unitId}${commandNumerator}${authenticationCode}${commandCodeField}${commandCodeField}${firstCommandDataField}${firstCommandDataField}${secondCommandDataField}${commandSpecificDataField}`;
@@ -22,11 +23,11 @@ const genericCommand = (uId, commandNumeratorField, codefield, firsttwice) => {
 exports.ack = (uId, commandNumerator, messageNumerator) => {
   const systemCode = utils.ascii2hex('MCGP');
   const messageType = '04';
-  const unitId = utils.reverseHex(utils.lpad(utils.convertBase(uId, 10, 16), 8));
-  const commandNumeratorField = utils.lpad(utils.convertBase(commandNumerator > 255 ? 0 : commandNumerator, 10, 16), 2);
+  const unitId = utils.reverseHex(core.lpad(core.convertBase(uId, 10, 16), 8));
+  const commandNumeratorField = core.lpad(core.convertBase(commandNumerator > 255 ? 0 : commandNumerator, 10, 16), 2);
   const authenticationCodeField = '00000000';
   const actionCode = '00';
-  const mainAckNumberLSB = utils.lpad(utils.convertBase(messageNumerator, 10, 16), 2);
+  const mainAckNumberLSB = core.lpad(core.convertBase(messageNumerator, 10, 16), 2);
   const mainAckNumberMSB = '00';
   const secundaryAckNumberLSB = '00';
   const secundaryAckNumberMSB = '00';
