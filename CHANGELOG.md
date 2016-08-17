@@ -1,3 +1,13 @@
+### 2.2.0 (2016-8-17)
+
+##### Chores
+
+* **package:** Update eslint ([9d118d86](https://github.com/lgaticaq/cellocator-parser/commit/9d118d86dd820e39fb6deb68d2d81280ab7283df))
+
+##### New Features
+
+* **parse:** Add parse alarm ([246ade8c](https://github.com/lgaticaq/cellocator-parser/commit/246ade8cbad68680171b769e959bbd8f6df2d7f0))
+
 ### 2.1.0 (2016-8-11)
 
 ##### Chores
