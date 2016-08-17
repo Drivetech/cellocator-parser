@@ -1,3 +1,15 @@
+#### 2.2.1 (2016-8-17)
+
+##### Chores
+
+* **package:**
+  * update eslint to version 3.3.1 ([6ae416a2](https://github.com/lgaticaq/cellocator-parser/commit/6ae416a25cd820091fd6e3456fcef2965278b6ec))
+  * update eslint to version 3.3.0 ([ad00c153](https://github.com/lgaticaq/cellocator-parser/commit/ad00c153d519773a6622c59cd0d26c81f6f8115a))
+
+##### Bug Fixes
+
+* **parser:** Rename sn to serialId ([733de7af](https://github.com/lgaticaq/cellocator-parser/commit/733de7af96e14f64431f557261e0b6b44df9b57f))
+
 ### 2.2.0 (2016-8-17)
 
 ##### Chores
