@@ -7,6 +7,12 @@ module.exports = (transmissionReason, transmissionReasonSpecificData) => {
   const txDataDec = core.convertBase(transmissionReasonSpecificData, 16, 10);
   const txDataBin = core.hex2bin(transmissionReasonSpecificData);
   let alarm = {};
+  const radioOffModes = {
+    '00': 1,
+    '01': null,
+    '10': 2,
+    '11': 3
+  };
   switch (tx) {
   case 4:
     alarm = {type: 'EmergencyMode'};
@@ -15,7 +21,7 @@ module.exports = (transmissionReason, transmissionReasonSpecificData) => {
     alarm = {type: 'DoorOpened'};
     break;
   case 6:
-    alarm = {type: 'Engine', status: true};
+    alarm = {type: 'EngineActivated'};
     break;
   case 7:
     alarm = {type: 'Gps_Status', status: false};
@@ -164,7 +170,7 @@ module.exports = (transmissionReason, transmissionReasonSpecificData) => {
     }
     break;
   case 35:
-    alarm = {type: 'IdleSpeed', status: true};
+    alarm = {type: 'Idling', status: true};
     break;
   case 36:
     alarm = {type: 'Distance'};
@@ -194,7 +200,7 @@ module.exports = (transmissionReason, transmissionReasonSpecificData) => {
     }
     break;
   case 43:
-    alarm = {type: 'IdleSpeed', status: false};
+    alarm = {type: 'Idling', status: false};
     break;
   case 44:
     alarm = {type: 'Gps'};
@@ -210,7 +216,7 @@ module.exports = (transmissionReason, transmissionReasonSpecificData) => {
     };
     break;
   case 47:
-    alarm = {type: 'DriverAuthentication', status: true};
+    alarm = {type: 'DriverAuthentication', status: false};
     break;
   case 48:
     switch (txDataBin) {
@@ -802,8 +808,7 @@ module.exports = (transmissionReason, transmissionReasonSpecificData) => {
     alarm = {
       type: 'RadioOffMode',
       early: txDataBin[5] === '1',
-      gps: txDataBin[6] === '1',
-      modem: txDataBin[7] === '1',
+      mode: radioOffModes[`${txDataBin[6]}${txDataBin[7]}`]
     };
     break;
   case 208:
