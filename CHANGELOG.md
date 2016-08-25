@@ -1,3 +1,13 @@
+#### 2.2.2 (2016-8-25)
+
+##### Chores
+
+* **package:** Update istanbul ([7b42f52c](https://github.com/lgaticaq/cellocator-parser/commit/7b42f52c6bc993cda147ddfda483206051506f3e))
+
+##### Bug Fixes
+
+* **alarms:** Fix alarms types ([3258b046](https://github.com/lgaticaq/cellocator-parser/commit/3258b04663a94721e878e99103dc21df98e5700c))
+
 #### 2.2.1 (2016-8-17)
 
 ##### Chores
