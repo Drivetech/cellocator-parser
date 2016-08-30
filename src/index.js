@@ -3,18 +3,13 @@
 const utils = require('./utils');
 const inbound = require('./inbound');
 
-const patterns = {
-  multi: /(4d434750[A-F0-9]{132})/gi,
-  data: /(4d434750[A-F0-9]{132})/i
-};
-
 const storeIncompleteData = {};
 
 const parse = raw => {
   const rawString = raw.toString('hex');
-  if (!patterns.data.test(rawString)) return {type: 'UNKNOWN', raw: rawString};
-  const results = rawString.split(patterns.multi).filter(x => patterns.data.test(x)).map(utils.getData);
-  const incompleteData = rawString.split(patterns.multi).filter(x => !patterns.data.test(x) && x !== '');
+  if (!utils.patterns.data.test(rawString)) return {type: 'UNKNOWN', raw: rawString};
+  const results = rawString.split(utils.patterns.multi).filter(x => utils.patterns.data.test(x)).map(utils.getData);
+  const incompleteData = rawString.split(utils.patterns.multi).filter(x => !utils.patterns.data.test(x) && x !== '');
   if (incompleteData.length > 0) {
     const reply = storeIncompleteData[results[0].unitId];
     if (reply) {
@@ -24,7 +19,7 @@ const parse = raw => {
       } else if (/^4d434750/.test(incompleteData[0])) {
         previousData = new Buffer(`${incompleteData[0]}${reply}`, 'hex');
       }
-      if (patterns.data.test(previousData.toString('hex'))) {
+      if (utils.patterns.data.test(previousData.toString('hex'))) {
         results.unshift(utils.getData(previousData));
       }
     } else {
@@ -35,11 +30,11 @@ const parse = raw => {
   return results;
 };
 
-const isCello = raw => patterns.data.test(raw.toString('hex'));
+const isCello = raw => utils.patterns.data.test(raw.toString('hex'));
 
 module.exports = {
   parse: parse,
-  patterns: patterns,
+  patterns: utils.patterns,
   isCello: isCello,
   getImei: utils.getImei,
   ack: inbound.ack,

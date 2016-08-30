@@ -49,10 +49,16 @@ describe('cellocator-parser', () => {
     expect(data).to.be.true;
   });
 
+  it('should return a null imei', () => {
+    const raw = new Buffer('lkjsdlkajsdlaksdjalskdjaslkdj');
+    const data = lib.getImei(raw);
+    expect(data).to.be.null;
+  });
+
   it('should return a valid imei', () => {
     const raw = new Buffer('4d43475000aac30c00000afc4e2104161d002001c30400002a69e193b600000042f7830fea440000a00000000000000000000000000000000000000000001f13111106e007a4', 'hex');
     const data = lib.getImei(raw);
-    expect(data).to.eql(357247050053442);
+    expect(data).to.eql('357247050053442');
   });
 
   it('should return a ACK command', () => {

@@ -5,6 +5,11 @@ const core = require('./core');
 const parseAlarm = require('./alarms');
 const moment = require('moment');
 
+const patterns = {
+  multi: /(4d434750[A-F0-9]{132})/gi,
+  data: /(4d434750[A-F0-9]{132})/i
+};
+
 const ascii2hex = data => data.split('').map(x => x.charCodeAt(0).toString(16).toUpperCase()).join('');
 
 const reverseHex = data => {
@@ -343,11 +348,17 @@ const getData = raw => {
 };
 
 const getImei = raw => {
-  const bytes = raw.toString('hex').split(/([A-F0-9]{2})/i).filter(x => x !== '');
-  return multiPurposeField(bytes.slice(32, 38).join(''), bytes[40]);
+  let imei = null;
+  const data = raw.toString('hex');
+  if (patterns.data.test(data)) {
+    const bytes = data.split(/([A-F0-9]{2})/i).filter(x => x !== '');
+    imei = multiPurposeField(bytes.slice(32, 38).join(''), bytes[40]);
+  }
+  return imei ? imei.toString() : null;
 };
 
 module.exports = {
+  patterns: patterns,
   ascii2hex: ascii2hex,
   reverseHex: reverseHex,
   checksum: checksum,
