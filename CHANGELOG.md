@@ -1,3 +1,9 @@
+#### 2.2.4 (2016-8-30)
+
+##### Bug Fixes
+
+* **parser:** Fix parseCommand and a add test ([f5bac3d7](https://github.com/lgaticaq/cellocator-parser/commit/f5bac3d75aebad28d165bd2557d51481ff62bd10))
+
 #### 2.2.3 (2016-8-30)
 
 ##### Chores
