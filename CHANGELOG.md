@@ -1,3 +1,13 @@
+#### 2.2.3 (2016-8-30)
+
+##### Chores
+
+* **package:** update eslint to version 3.4.0 ([16194b2b](https://github.com/lgaticaq/cellocator-parser/commit/16194b2b8102c27f6763b9cedd09e0e727f8a425))
+
+##### Bug Fixes
+
+* **parser:** Fix getImei ([9dfda004](https://github.com/lgaticaq/cellocator-parser/commit/9dfda004265cf77f5e682a7c384a7ce2aeda3ca4))
+
 #### 2.2.2 (2016-8-25)
 
 ##### Chores
