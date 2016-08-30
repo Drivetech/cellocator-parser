@@ -154,4 +154,14 @@ describe('cellocator-parser', () => {
     const ack = lib.ack(unitId, commandNumerator, messageNumerator);
     expect(ack).to.eql(new Buffer('4D43475004AAC30C00010000000000500000000000000000000000CE', 'hex'));
   });
+
+  it('should return a di command', () => {
+    const data = {
+      unitId: 836522,
+      commandNumerator: 1,
+      instruction: '1_on'
+    };
+    const command = lib.parseCommand(data);
+    expect(command).to.eql(new Buffer('4d43475000aac30c0001000000000003000300140014000000000000a8', 'hex'));
+  });
 });

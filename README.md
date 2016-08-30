@@ -113,6 +113,14 @@ const data = cellocator.parse(raw);
   messageType: 0,
   valid: true
 }*/
+
+const data = {
+  unitId: 836522,
+  commandNumerator: 1,
+  instruction: '1_on' // enable output 1 => port + _ + on/off
+};
+const command = cellocator.parseCommand(data);
+// new Buffer('4d43475000aac30c0001000000000003000300140014000000000000a8', 'hex')
 ```
 
 ## License

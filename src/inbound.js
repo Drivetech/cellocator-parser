@@ -7,7 +7,9 @@ const commands = require('./commands');
 const genericCommand = (uId, commandNumeratorField, codefield, firsttwice) => {
   const systemCode = utils.ascii2hex('MCGP');
   const messageType = '00';
+  // unitId to hex with padding of 4 bytes and reverse
   const unitId = utils.reverseHex(core.lpad(core.convertBase(uId, 10, 16), 8));
+  // commandNumerator to hex
   const commandNumerator = core.lpad(core.convertBase(commandNumeratorField > 255 ? 0 : commandNumeratorField, 10, 16), 2);
   const authenticationCode = '00000000';
   const commandCodeField = core.lpad(codefield, 4);
@@ -23,7 +25,9 @@ const genericCommand = (uId, commandNumeratorField, codefield, firsttwice) => {
 exports.ack = (uId, commandNumerator, messageNumerator) => {
   const systemCode = utils.ascii2hex('MCGP');
   const messageType = '04';
+  // unitId to hex with padding of 4 bytes and reverse
   const unitId = utils.reverseHex(core.lpad(core.convertBase(uId, 10, 16), 8));
+  // commandNumerator to hex
   const commandNumeratorField = core.lpad(core.convertBase(commandNumerator > 255 ? 0 : commandNumerator, 10, 16), 2);
   const authenticationCodeField = '00000000';
   const actionCode = '00';
@@ -73,5 +77,5 @@ const instructionParsers = data => {
 
 exports.parseCommand = data => {
   const command = instructionParsers(data);
-  return genericCommand(data.unitId, data.commandNumeratorField, command.codeField, command.dataField);
+  return genericCommand(data.unitId, data.commandNumerator, command.codeField, command.dataField);
 };
