@@ -1,3 +1,9 @@
+#### 2.2.6 (2016-10-14)
+
+##### Chores
+
+* **package:** Update dependencies ([2a029ed8](https://github.com/lgaticaq/cellocator-parser/commit/2a029ed8d207da5bee8981a5a9d75d95519f4c26))
+
 #### 2.2.5 (2016-10-14)
 
 ##### Chores
