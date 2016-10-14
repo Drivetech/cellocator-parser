@@ -289,6 +289,7 @@ const getData = raw => {
     raw: bytes.join(''),
     unitId: parseUnitsId(bytes.slice(5, 9).join('')),
     imei: multiPurposeField(bytes.slice(32, 38).join(''), bytes[40]),
+    manufacturer: 'cellocator',
     device: 'CelloTrack',
     type: 'data',
     alarm: parseAlarm(bytes[18], bytes[17]),

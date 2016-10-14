@@ -9,6 +9,7 @@ describe('cellocator-parser', () => {
     const data = lib.parse(raw);
     expect(data.raw).to.eql(raw.toString('hex'));
     expect(data.unitId).to.eql(776893);
+    expect(data.manufacturer).to.eql('cellocator');
     expect(data.device).to.eql('CelloTrack');
     expect(data.alarm.type).to.eql('ConnectionUp');
     expect(data.type).to.eql('data');
@@ -76,6 +77,7 @@ describe('cellocator-parser', () => {
     expect(results1).to.have.lengthOf(4);
     expect(results1[0].raw).to.eql(raw1.toString('hex').substr(0, 140));
     expect(results1[0].unitId).to.eql(1158328);
+    expect(results1[0].manufacturer).to.eql('cellocator');
     expect(results1[0].device).to.eql('CelloTrack');
     expect(results1[0].alarm.type).to.eql('Driving');
     expect(results1[0].type).to.eql('data');
@@ -113,6 +115,7 @@ describe('cellocator-parser', () => {
     expect(results2[0].raw).to.eql('4d43475000b8ac1100081824eb2904151d00450123b300002968defe980000005c530524c7420000a00000000000000000000000000000000000000000001921050e010000f3');
     expect(results2[1].raw).to.eql(raw1.toString('hex').substr(0, 140));
     expect(results2[1].unitId).to.eql(1158328);
+    expect(results2[1].manufacturer).to.eql('cellocator');
     expect(results2[1].device).to.eql('CelloTrack');
     expect(results2[1].alarm.type).to.eql('Driving');
     expect(results2[1].type).to.eql('data');
