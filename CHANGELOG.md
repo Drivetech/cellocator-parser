@@ -1,3 +1,20 @@
+#### 2.2.5 (2016-10-14)
+
+##### Chores
+
+* **package:**
+  * Add support to yarnpkg ([a07f7bf6](https://github.com/lgaticaq/cellocator-parser/commit/a07f7bf6d4c8ee4dbd3be2bd4d185cf8a1d57b9f))
+  * update eslint to version 3.7.1 ([0ec30715](https://github.com/lgaticaq/cellocator-parser/commit/0ec30715a69c1d9294070e6131beadc807bf10d2))
+  * update codeclimate-test-reporter to version 0.4.0 ([6b9c90b1](https://github.com/lgaticaq/cellocator-parser/commit/6b9c90b170c0877b50a6ab1506ca6ad1dfd15088))
+  * update eslint to version 3.7.0 ([b60b0f81](https://github.com/lgaticaq/cellocator-parser/commit/b60b0f815fdfcd78de39b703b2d7fbfe5418c698))
+  * update eslint to version 3.6.1 ([a7982d4e](https://github.com/lgaticaq/cellocator-parser/commit/a7982d4e96685af21f40389f59278c04677c9bba))
+  * update eslint to version 3.6.0 ([f8a88048](https://github.com/lgaticaq/cellocator-parser/commit/f8a880483357339f8ca22b387aeefa01154f67eb))
+  * update eslint to version 3.5.0 ([f4df34c0](https://github.com/lgaticaq/cellocator-parser/commit/f4df34c045bbbe313bc4825a14a01f3bc9573362))
+
+##### New Features
+
+* **parser:** Add manufacturer to data ([2482e98c](https://github.com/lgaticaq/cellocator-parser/commit/2482e98c5b3b8336d258473bf25861d342f5475c))
+
 #### 2.2.4 (2016-8-30)
 
 ##### Bug Fixes
