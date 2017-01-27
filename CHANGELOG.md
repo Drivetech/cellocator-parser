@@ -1,3 +1,15 @@
+#### 2.2.7 (2017-1-26)
+
+##### Chores
+
+* **package:**
+  * Update dependencies ([0eb5a257](https://github.com/lgaticaq/cellocator-parser/commit/0eb5a257f7f345cb84cf362e4546ef02cf018992))
+  * update eslint to version 3.9.0 ([8f3ce611](https://github.com/lgaticaq/cellocator-parser/commit/8f3ce611e23b5a706ba2975666247b3515c09100))
+  * update eslint to version 3.8.1 ([723c0e59](https://github.com/lgaticaq/cellocator-parser/commit/723c0e59e5cbee2b21ec84f16a2f1ac74a5d0844))
+  * update eslint to version 3.8.0 ([21dd8c90](https://github.com/lgaticaq/cellocator-parser/commit/21dd8c90d84d2756e5a0aa4b37e31a751097ec16))
+* **travis:** Update node version ([2ca56168](https://github.com/lgaticaq/cellocator-parser/commit/2ca561684dc9018e76a3c4da305b8977a0303283))
+* **nvm:** Update node version to v7 ([ac90bd21](https://github.com/lgaticaq/cellocator-parser/commit/ac90bd213f9125346cdd9f7ed93724359cfc6581))
+
 #### 2.2.6 (2016-10-14)
 
 ##### Chores
