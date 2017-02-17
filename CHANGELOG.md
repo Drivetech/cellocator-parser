@@ -1,3 +1,17 @@
+#### 2.2.8 (2017-2-17)
+
+##### Chores
+
+* **package:**
+  * Upgrade codeclimate-test-reporter to v0.4.1 ([e0c7d06d](https://github.com/lgaticaq/cellocator-parser/commit/e0c7d06d49ac62220e8b6533e4c2c989c133c859))
+  * Upgrade coveralls to v2.11.16 ([787d9dc0](https://github.com/lgaticaq/cellocator-parser/commit/787d9dc0f02248f2e51194e987e86f6c7db38305))
+  * Upgrade eslint to v3.15.0 ([91b3cddf](https://github.com/lgaticaq/cellocator-parser/commit/91b3cddfac19a03dbf1728150ca31726008d062e))
+  * Replace moment with date-fns ([a2503c22](https://github.com/lgaticaq/cellocator-parser/commit/a2503c22ba14ae66f6a7808574a191865b16c6b4))
+
+##### Documentation Changes
+
+* **LICENSE:** Update year ([cd6a6321](https://github.com/lgaticaq/cellocator-parser/commit/cd6a6321081a57e7df3ac104c8b2b35c70c34497))
+
 #### 2.2.7 (2017-1-26)
 
 ##### Chores
