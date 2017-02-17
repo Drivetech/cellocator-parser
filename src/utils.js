@@ -3,7 +3,8 @@
 const hardwares = require('./hardwares');
 const core = require('./core');
 const parseAlarm = require('./alarms');
-const moment = require('moment');
+const isValid = require('date-fns/is_valid');
+const format = require('date-fns/format');
 
 const patterns = {
   multi: /(4d434750[A-F0-9]{132})/gi,
@@ -126,13 +127,13 @@ const multiPurposeField = (bytes33To38, byte41) => {
 
 const parseGpsTime = (bytefrom39to40, seconds) => {
   seconds = core.lpad(core.convertBase(seconds, 16, 10), 2);
-  const now = moment().format('YYYY-MM');
+  const now = format(new Date(), 'YYYY-MM');
   const data = core.hex2bin(reverseHex(bytefrom39to40));
   const day = `00${core.convertBase(data.substr(0, 5), 2, 10)}`.substr(-2);
   const hours = `00${core.convertBase(data.substr(5, 5), 2, 10)}`.substr(-2);
   const minutes = `00${core.convertBase(data.substr(10, 6), 2, 10)}`.substr(-2);
-  const datetime = moment(`${now}-${day} ${hours}:${minutes}:${seconds}`);
-  return datetime.isValid() ? datetime.toISOString() : null;
+  const datetime = new Date(`${now}-${day}T${hours}:${minutes}:${seconds}`);
+  return isValid(datetime) ? datetime.toISOString() : null;
 };
 
 const parseLocationStatus = byte41 => {
@@ -265,9 +266,8 @@ const parseDatetime = (bytes68To69, byte67, byte66, byte65, byte64, byte63) => {
   const hour = core.lpad(core.convertBase(byte65, 16, 10), 2);
   const minute = core.lpad(core.convertBase(byte64, 16, 10), 2);
   const second = core.lpad(core.convertBase(byte63, 16, 10), 2);
-  const date = `${year}${month}${day}${hour}${minute}${second}`;
-  const datetime = moment(`${date}+00:00`, 'YYYYMMDDHHmmssZZ');
-  return datetime.isValid() ? datetime.toISOString() : null;
+  const datetime = new Date(`${year}-${month}-${day}T${hour}:${minute}:${second}+00:00`);
+  return isValid(datetime) ? datetime.toISOString() : null;
 };
 
 const checksum = trama => {
