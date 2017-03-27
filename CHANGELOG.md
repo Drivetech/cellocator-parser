@@ -1,3 +1,12 @@
+#### 2.2.9 (2017-3-27)
+
+##### Chores
+
+* **package:**
+  * Upgrade eslint to version 3.18.0 ([38c4512f](https://github.com/lgaticaq/cellocator-parser/commit/38c4512fbfe1cfb84debce6ff23fb0eb247cc191))
+  * Upgrade coveralls to version 2.12.0 ([0457afbb](https://github.com/lgaticaq/cellocator-parser/commit/0457afbbb370e2c600dd24595adb3aba858ff67f))
+  * Upgrade date-fns to version 1.28.2 ([b0482b28](https://github.com/lgaticaq/cellocator-parser/commit/b0482b28776852f21e027963bc21999c30e3130b))
+
 #### 2.2.8 (2017-2-17)
 
 ##### Chores
