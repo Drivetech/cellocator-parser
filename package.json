@@ -34,7 +34,7 @@
   "homepage": "https://github.com/lgaticaq/cellocator-parser#readme",
   "dependencies": {
     "convert-base": "^0.1.0",
-    "date-fns": "^1.27.2",
+    "date-fns": "^1.28.2",
     "pad": "^1.0.2"
   },
   "devDependencies": {
