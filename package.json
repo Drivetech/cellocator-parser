@@ -1,5 +1,5 @@
 {
-  "name": "cellocator-parser",
+  "name": "@drivetech/cellocator-parser",
   "version": "2.2.9",
   "description": "Parse raw data from cellocator devices",
   "main": "src",
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/lgaticaq/cellocator-parser.git"
+    "url": "https://github.com/drivetech/cellocator-parser.git"
   },
   "keywords": [
     "cellocator",
@@ -29,9 +29,9 @@
   "author": "Leonardo Gatica <lgatica@protonmail.com> (https://about.me/lgatica)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/lgaticaq/cellocator-parser/issues"
+    "url": "https://github.com/drivetech/cellocator-parser/issues"
   },
-  "homepage": "https://github.com/lgaticaq/cellocator-parser#readme",
+  "homepage": "https://github.com/drivetech/cellocator-parser#readme",
   "dependencies": {
     "convert-base": "^0.1.0",
     "date-fns": "^1.28.2",
@@ -72,5 +72,8 @@
       ]
     }
   },
-  "tonicExampleFilename": "example.js"
+  "tonicExampleFilename": "example.js",
+  "publishConfig": {
+    "access": "public"
+  }
 }

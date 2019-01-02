@@ -1,26 +1,26 @@
 # cellocator-parser
 
-[![npm version](https://img.shields.io/npm/v/cellocator-parser.svg?style=flat-square)](https://www.npmjs.com/package/cellocator-parser)
-[![npm downloads](https://img.shields.io/npm/dm/cellocator-parser.svg?style=flat-square)](https://www.npmjs.com/package/cellocator-parser)
-[![Build Status](https://img.shields.io/travis/lgaticaq/cellocator-parser.svg?style=flat-square)](https://travis-ci.org/lgaticaq/cellocator-parser)
-[![Coverage Status](https://img.shields.io/coveralls/lgaticaq/cellocator-parser/master.svg?style=flat-square)](https://coveralls.io/github/lgaticaq/cellocator-parser?branch=master)
-[![Code Climate](https://img.shields.io/codeclimate/github/lgaticaq/cellocator-parser.svg?style=flat-square)](https://codeclimate.com/github/lgaticaq/cellocator-parser)
-[![dependency Status](https://img.shields.io/david/lgaticaq/cellocator-parser.svg?style=flat-square)](https://david-dm.org/lgaticaq/cellocator-parser#info=dependencies)
-[![devDependency Status](https://img.shields.io/david/dev/lgaticaq/cellocator-parser.svg?style=flat-square)](https://david-dm.org/lgaticaq/cellocator-parser#info=devDependencies)
+[![npm version](https://img.shields.io/npm/v/@drivetech/cellocator-parser.svg?style=flat-square)](https://www.npmjs.com/package/@drivetech/cellocator-parser)
+[![npm downloads](https://img.shields.io/npm/dm/@drivetech/cellocator-parser.svg?style=flat-square)](https://www.npmjs.com/package/@drivetech/cellocator-parser)
+[![Build Status](https://travis-ci.org/Drivetech/cellocator-parser.svg?branch=master)](https://travis-ci.org/Drivetech/cellocator-parser)
+[![Coverage Status](https://coveralls.io/repos/github/Drivetech/cellocator-parser/badge.svg?branch=master)](https://coveralls.io/github/Drivetech/cellocator-parser?branch=master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/b34ffadccf17004a3dae/maintainability)](https://codeclimate.com/github/Drivetech/cellocator-parser/maintainability)
+[![dependency Status](https://img.shields.io/david/drivetech/cellocator-parser.svg?style=flat-square)](https://david-dm.org/drivetech/cellocator-parser#info=dependencies)
+[![devDependency Status](https://img.shields.io/david/dev/drivetech/cellocator-parser.svg?style=flat-square)](https://david-dm.org/drivetech/cellocator-parser#info=devDependencies)
 
 > Parse raw data from cellocator devices
 
 ## Installation
 
 ```bash
-npm i -S cellocator-parser
+npm i -S @drivetech/cellocator-parser
 ```
 
 ## Use
 
-[Try on Tonic](https://tonicdev.com/npm/cellocator-parser)
+[Try on Tonic](https://tonicdev.com/npm/@drivetech/cellocator-parser)
 ```js
-const cellocator = require('cellocator-parser');
+const cellocator = require('@drivetech/cellocator-parser');
 
 const raw = new Buffer('4d43475000bdda0b0000060ddf20041017002000e3c40000baeff3c6b6224502000000000000ea65000402090daec5f7cb302cff3357000038090000930a002a170c03e007c1', 'hex');
 const data = cellocator.parse(raw);
