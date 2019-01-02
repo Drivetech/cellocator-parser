@@ -1,6 +1,6 @@
 {
   "name": "@drivetech/cellocator-parser",
-  "version": "2.2.9",
+  "version": "2.2.10",
   "description": "Parse raw data from cellocator devices",
   "main": "src",
   "scripts": {
