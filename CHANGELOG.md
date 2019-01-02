@@ -1,3 +1,67 @@
+#### 2.2.10 (2019-01-02)
+
+##### Chores
+
+* **deps:**
+  *  update dependency chai to v4.2.0 ([36bd3091](https://github.com/drivetech/cellocator-parser/commit/36bd3091a405a7cbc91dd3ad8bafc7410e31acea))
+  *  update dependency codeclimate-test-reporter to v0.5.1 ([cfe8833a](https://github.com/drivetech/cellocator-parser/commit/cfe8833aea16a930e932b046f412ca17548ac77f))
+  *  update dependency eslint to v5.11.0 ([ed31da64](https://github.com/drivetech/cellocator-parser/commit/ed31da64770c7281399c9b76382756d4b6d90a34))
+  *  update dependency eslint to v5 ([a7d1eebc](https://github.com/drivetech/cellocator-parser/commit/a7d1eebcf2ffd62d3f1970fa2114602763139253))
+  *  update dependency coveralls to v3.0.2 ([5f4b9402](https://github.com/drivetech/cellocator-parser/commit/5f4b94022912889f744c31abfa450be10c66d515))
+  *  update dependency mocha to v5.2.0 ([4f916dbe](https://github.com/drivetech/cellocator-parser/commit/4f916dbed2f5a211b5983ae1b47a12e4b8cb6677))
+  *  update dependency coveralls to v3.0.1 ([6c2432bd](https://github.com/drivetech/cellocator-parser/commit/6c2432bda48376ed3c5aa3ad64f59679f258f466))
+  *  update dependency mocha to v5.1.1 ([c2cea6a4](https://github.com/drivetech/cellocator-parser/commit/c2cea6a48ee1a4f67b1e9073571da4ba92c7a266))
+  *  update dependency mocha to v5.1.0 ([990ad2a0](https://github.com/drivetech/cellocator-parser/commit/990ad2a0130f8365557afd5ce4187907163c4255))
+  *  update dependency generate-changelog to v1.7.1 ([90185cc8](https://github.com/drivetech/cellocator-parser/commit/90185cc83c57e4cb770a2414eb5a6f24362fc3b9))
+  *  update dependency mocha to v5.0.5 ([61711089](https://github.com/drivetech/cellocator-parser/commit/61711089969ca620bcc2e9c2920cc9b9e51e1392))
+  *  update dependency eslint to v4.19.1 ([a30d4c51](https://github.com/drivetech/cellocator-parser/commit/a30d4c516c298f1b42e267f50bc73c39c9d24595))
+  *  update dependency eslint to v4.19.0 ([fd2d7404](https://github.com/drivetech/cellocator-parser/commit/fd2d74044b8d77b34c1fe2801f5447ffa0f56f36))
+  *  update dependency mocha to v5.0.4 ([2bd39ec4](https://github.com/drivetech/cellocator-parser/commit/2bd39ec45d586e656932c18f5c40f98a991cb83e))
+  *  update dependency mocha to v5.0.3 ([4903ead8](https://github.com/drivetech/cellocator-parser/commit/4903ead8543503c072cf6da7927c52c4dd3c6c52))
+  *  update dependency mocha to v5.0.2 ([09f82ab8](https://github.com/drivetech/cellocator-parser/commit/09f82ab83cf14f1a4bc09df7db547e4767482842))
+  *  update dependency eslint to v4.18.2 ([19a12172](https://github.com/drivetech/cellocator-parser/commit/19a121729d674675b3bd8b36628ee70c766baad9))
+  *  update dependency eslint to v4.18.1 ([a69b72e0](https://github.com/drivetech/cellocator-parser/commit/a69b72e0743050c6e36cd2486f389ac2a3178a89))
+  *  update dependency eslint to v4.18.0 ([30f37bd2](https://github.com/drivetech/cellocator-parser/commit/30f37bd2d380b19adcea8ea67ee8c42533a849f3))
+  *  update dependency mocha to v5.0.1 ([49658309](https://github.com/drivetech/cellocator-parser/commit/4965830954684f9ff2ad66a8e0686781ca98f51c))
+  *  update dependency eslint to v4.17.0 ([eb5c18f5](https://github.com/drivetech/cellocator-parser/commit/eb5c18f53b5dfa109fe1ec4bb3e4280e79a0d27f))
+  *  update dependency eslint to v4.16.0 ([bec0c605](https://github.com/drivetech/cellocator-parser/commit/bec0c6051816d21e5f1678376c1bfe8c82267e1a))
+  *  update dependency mocha to v5.0.0 ([c3fadcef](https://github.com/drivetech/cellocator-parser/commit/c3fadcef3c94898d7c7b3a56856da1fa386a8603))
+  *  update dependency mocha to v4.1.0 ([f15733b6](https://github.com/drivetech/cellocator-parser/commit/f15733b6b38c2e14b954b33b55c56b248b35e60a))
+  *  update dependency eslint to v4.14.0 ([a9bd702d](https://github.com/drivetech/cellocator-parser/commit/a9bd702d1ac6d9783471c2ce6dcb101ec8aeb408))
+  *  update dependency generate-changelog to v1.7.0 ([4df93743](https://github.com/drivetech/cellocator-parser/commit/4df9374319d55d4223e19e20f9d9bc4dca54c48c))
+  *  update dependency eslint to v4.13.1 ([5b8bf0dd](https://github.com/drivetech/cellocator-parser/commit/5b8bf0dd44677c0d1b1ca439dc78a5e0a6ee2428))
+  *  update dependency eslint to v4.13.0 ([fbf684fb](https://github.com/drivetech/cellocator-parser/commit/fbf684fbfae72f6cc7194a3393a094d47a8452a6))
+  *  update dependency eslint to v4.12.1 ([0f1dcbe1](https://github.com/drivetech/cellocator-parser/commit/0f1dcbe1e81302a63c805a2deb23f3bff5a691e1))
+  *  update dependency eslint to v4.12.0 ([6f55af26](https://github.com/drivetech/cellocator-parser/commit/6f55af269bd0bcea6956ff3cfa16ac321e2444f2))
+  *  update dependency generate-changelog to v1.6.0 ([c0d7f4a1](https://github.com/drivetech/cellocator-parser/commit/c0d7f4a1c308e0d68aa4095267e5b56bb676e07d))
+  *  update dependency eslint to v4.11.0 ([d16128e4](https://github.com/drivetech/cellocator-parser/commit/d16128e4095e42a44d2412e16d77640b457b7b26))
+  *  update dependency eslint to v4.10.0 ([b87d40fd](https://github.com/drivetech/cellocator-parser/commit/b87d40fdd4c03cc7ac05fe2aaeb8a3188787dd2d))
+  *  update dependency eslint to v4.9.0 ([b87d2cc0](https://github.com/drivetech/cellocator-parser/commit/b87d2cc0a60cd92099e6db774960206fb4b25ddc))
+  *  update dependency mocha to v4.0.1 ([d9a5a16e](https://github.com/drivetech/cellocator-parser/commit/d9a5a16ec92b30c08bad56365984cee0ddd7c710))
+  *  update dependency mocha to v4.0.0 ([bd6c78fe](https://github.com/drivetech/cellocator-parser/commit/bd6c78fe62cd2a3b15196ab34d8072d3a89f0a62))
+  *  update dependency eslint to v4.8.0 ([00b8084b](https://github.com/drivetech/cellocator-parser/commit/00b8084bf66a870abc944c5acc45adea6562e0c7))
+  *  update dependency coveralls to v3.0.0 ([94152f52](https://github.com/drivetech/cellocator-parser/commit/94152f523dfe327d315c0d3c1deaa6d91cfcdaca))
+  *  update dependency coveralls to v2.13.3 ([9b2d6082](https://github.com/drivetech/cellocator-parser/commit/9b2d60823160589a29a064efcd79136fb64c1058))
+  *  update dependency coveralls to v2.13.2 ([531fda95](https://github.com/drivetech/cellocator-parser/commit/531fda955b8d520d79c2ba0576a32b82156aac37))
+  *  update dependency generate-changelog to v1.5.0 ([720434b6](https://github.com/drivetech/cellocator-parser/commit/720434b6a1e06a68e4684269aa7b0d23fddb82f9))
+  *  update dependency eslint to v4.7.2 ([3ed5c39b](https://github.com/drivetech/cellocator-parser/commit/3ed5c39bce6a1aa7a281270c05d1b05ce582f21a))
+  *  update dependency eslint to v4.7.1 ([33bd38e9](https://github.com/drivetech/cellocator-parser/commit/33bd38e9bf2d2be821e0e5510451d0051e0fdee2))
+  *  update dependency eslint to v4.7.0 ([c7bd6e72](https://github.com/drivetech/cellocator-parser/commit/c7bd6e72f820d2a58eae8802cde53369d2330116))
+  *  update dependency mocha to v3.5.3 ([8f2062f6](https://github.com/drivetech/cellocator-parser/commit/8f2062f635429ec5b9ff37cccaec99ba4c6a378f))
+  *  update dependency chai to v4.1.2 ([c78a85f1](https://github.com/drivetech/cellocator-parser/commit/c78a85f1d0510dd4b4b5e2799e8de635508c3b65))
+  *  update dependency eslint to v4.6.1 ([10c7cde6](https://github.com/drivetech/cellocator-parser/commit/10c7cde610e1c5ed7a206b67984af3b1e95a1cd6))
+  *  update dependency mocha to v3.5.2 ([e32883c5](https://github.com/drivetech/cellocator-parser/commit/e32883c58d5890ac43bcf9ad2408618c19bd5df9))
+  *  update dependency codeclimate-test-reporter to v0.5.0 ([100bf677](https://github.com/drivetech/cellocator-parser/commit/100bf677176aa90693bbbf2c55f36b88334a5a24))
+
+##### Bug Fixes
+
+* **package:**  transfer to drivetech org ([3aabcd78](https://github.com/drivetech/cellocator-parser/commit/3aabcd78b44fafcae14c418b29b61b9140aae122))
+* **deps:**  update dependency pad to v^2.0.0 ([d12683f9](https://github.com/drivetech/cellocator-parser/commit/d12683f937f1be22d3b892e404b75f35352e17d5))
+
+##### Refactors
+
+* **deps:**  renovate pin dependencies packages ([f9c04b24](https://github.com/drivetech/cellocator-parser/commit/f9c04b24a580d1ba24021e818001c22021ac8774))
+
 #### 2.2.9 (2017-3-27)
 
 ##### Chores
