@@ -1009,9 +1009,9 @@ os-tmpdir@~1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/os-tmpdir/-/os-tmpdir-1.0.2.tgz#bbe67406c79aa85c5cfec766fe5734555dfa1274"
 
-pad@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/pad/-/pad-2.0.0.tgz#20e5cc9cbc4ca6e707a67c566dc7df5200928f32"
+pad@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/pad/-/pad-3.0.0.tgz#0b8c6e0ec9a3a8e40c2536f63ec388b198ddb443"
   dependencies:
     wcwidth "^1.0.1"
 
