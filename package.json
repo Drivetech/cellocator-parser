@@ -34,7 +34,7 @@
   "homepage": "https://github.com/drivetech/cellocator-parser#readme",
   "dependencies": {
     "convert-base": "^0.1.0",
-    "date-fns": "^1.28.2",
+    "date-fns": "^4.0.0",
     "pad": "^2.0.0"
   },
   "devDependencies": {
